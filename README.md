@@ -4,6 +4,9 @@ This project is part of an Angular tutorial where we explore how to setup a simp
 
 Get the step by step free tutorial in https://angular-templates.io/tutorials/about/firebase-authentication-with-angular
 
+
+**Please support this project by simply putting a Github star ⭐. Share this repo with friends on Twitter and everywhere else you can. 🙏 Thanks**
+
 ## Installation
 
 Run `npm install` to install all the required dependencies
