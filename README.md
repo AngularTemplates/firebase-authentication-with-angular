@@ -1,4 +1,4 @@
-# Firebase Authentication with Angular 6
+# Firebase Authentication with Angular 5
 
 Thanks to [AngularTemplates](https://github.com/AngularTemplates) team for original version of this project developed with Angular 6. you can get access for it with this link:
 
