@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="course">
+        <mat-form-field>
+          <input
+            matInput
+            (keyup)="applyFilter($event.target.value)"
+            placeholder="Search Customers"
+            #input
+          />
+        </mat-form-field>
+
+        <div class="mat-elevation-z8">
+          <mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="customer_name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header
+                >Nname</mat-header-cell
+              >
+              <mat-cell *matCellDef="let customer">{{
+                customer.customer_name
+              }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+              <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+              <mat-cell class="description-cell" *matCellDef="let customer">{{
+                customer.amount
+              }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="grant_total">
+              <mat-header-cell *matHeaderCellDef>Grant Total</mat-header-cell>
+              <mat-cell class="description-cell" *matCellDef="let customer">{{
+                customer.grant_total
+              }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="paid">
+              <mat-header-cell *matHeaderCellDef>Paid</mat-header-cell>
+              <mat-cell class="duration-cell" *matCellDef="let customer">
+                <mat-form-field>
+                  <input
+                    matInput
+                    (keyup.enter)="updateAmount($event.target.value, customer)"
+                    value="{{customer.paid}}"
+                    #amount
+                  />
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="edit">
+              <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+              <mat-cell class="duration-cell" *matCellDef="let customer">
+                <!-- <mat-form-field> -->
+                <button mat-button #edit>Edit</button>
+                <!-- </mat-form-field> -->
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="history">
+              <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+              <mat-cell class="duration-cell" *matCellDef="let customer">
+                <!-- <mat-form-field> -->
+                <button mat-button #history>History</button>
+                <!-- </mat-form-field> -->
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns"
+            ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>
+
+          <mat-paginator
+            [pageSize]="20"
+            [pageSizeOptions]="[30, 40, 50]"
+          ></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->

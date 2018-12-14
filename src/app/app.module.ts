@@ -17,12 +17,31 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
+// page
+// import { LoginComponent } from './pages/login/login.component';
+import { CollectionListComponent } from './pages/collection-list/collection-list.component';
+
+// components
+
+// services
+import { HttpService } from './services/http.service';
+//  angular material
+import {
+  MatFormFieldModule,
+  MatInputModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatSortModule,
+  MatTableModule
+} from '@angular/material';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     UserComponent,
-    RegisterComponent
+    RegisterComponent,
+    CollectionListComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +50,14 @@ import { AppComponent } from './app.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule
   ],
-  providers: [AuthService, UserService, UserResolver, AuthGuard],
+  providers: [AuthService, UserService, UserResolver, AuthGuard, HttpService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
