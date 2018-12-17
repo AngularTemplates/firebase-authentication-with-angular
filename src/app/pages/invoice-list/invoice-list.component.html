@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="course">
+        <mat-form-field>
+          <input
+            matInput
+            (keyup)="applyFilter($event.target.value)"
+            placeholder="Search Customers"
+            #input
+          />
+        </mat-form-field>
+
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="customer_name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+              <td mat-cell class="name col-xs-2" *matCellDef="let customer">
+                {{ customer.customer_name }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="grand_total">
+              <th mat-header-cell *matHeaderCellDef>Grant Total</th>
+              <td
+                mat-cell
+                class="description-cell col-xs-4"
+                *matCellDef="let customer"
+                style="color: rgba(22, 188, 218, 0.699);"
+              >
+                {{ customer.grand_total_text }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="paid">
+              <th mat-header-cell *matHeaderCellDef>Paid</th>
+              <td
+                mat-cell
+                class="duration-cell col-xs-2"
+                *matCellDef="let customer"
+              >
+                <mat-form-field>
+                  <input
+                    matInput
+                    (keyup.enter)="updateAmount($event.target.value, customer)"
+                    value="{{ customer.paid }}"
+                    #amount
+                    [disabled]="customer.is_paid_status ? true : false"
+                  />
+                </mat-form-field>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="edit">
+              <th mat-header-cell *matHeaderCellDef>Edit</th>
+              <td
+                mat-cell
+                class="duration-cell col-xs-1"
+                *matCellDef="let customer"
+              >
+                <span class="glyphicon glyphicon-edit" #edit></span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="history">
+              <th mat-header-cell *matHeaderCellDef>Histoty</th>
+              <td
+                mat-cell
+                class="duration-cell col-xs-1"
+                *matCellDef="let customer"
+              >
+                <span class="glyphicon glyphicon-th-list" #history></span>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+
+          <div
+            *ngIf="isLoading"
+            style="display: flex; justify-content: center; align-items: center"
+          >
+            <h2>Loading...</h2>
+          </div>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- </div> -->

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
@@ -16,10 +17,10 @@ import { UserService } from './core/user.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-
+import { HttpClientModule } from '@angular/common/http';
 // page
 // import { LoginComponent } from './pages/login/login.component';
-import { CollectionListComponent } from './pages/collection-list/collection-list.component';
+import { InvoiceListComponent } from './pages/invoice-list/invoice-list.component';
 
 // components
 
@@ -30,10 +31,11 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatPaginatorModule,
-  MatProgressSpinnerModule,
   MatSortModule,
   MatTableModule
 } from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -41,21 +43,24 @@ import {
     LoginComponent,
     UserComponent,
     RegisterComponent,
-    CollectionListComponent
+    InvoiceListComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   providers: [AuthService, UserService, UserResolver, AuthGuard, HttpService],
   bootstrap: [AppComponent]
