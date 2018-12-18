@@ -36,6 +36,7 @@ import {
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
+import { EditVoiceComponent } from './shared/edit-voice/edit-voice.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MatIconModule } from '@angular/material/icon';
     LoginComponent,
     UserComponent,
     RegisterComponent,
-    InvoiceListComponent
+    InvoiceListComponent,
+    EditVoiceComponent
   ],
   imports: [
     BrowserModule,

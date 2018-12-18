@@ -1,0 +1,40 @@
+<form [formGroup]="editInvoiceForm" novalidate>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Grand Total"
+      type="text"
+      formControlName="grand_total"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Paid Amount"
+      type="text"
+      formControlName="paid_amount"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Due" type="text" formControlName="due" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Extra" type="text" formControlName="extra" />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Comments"
+      type="text"
+      formControlName="comments"
+    />
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    [disabled]="editInvoiceForm.invalid"
+    (click)="editInvoice()"
+  >
+    Update
+  </button>
+</form>
