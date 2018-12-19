@@ -15,6 +15,7 @@ import { AuthGuard } from './core/auth.guard';
 import { AuthService } from './core/auth.service';
 import { UserService } from './core/user.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MobxAngularModule } from 'mobx-angular';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -62,7 +63,8 @@ import { EditVoiceComponent } from './shared/edit-voice/edit-voice.component';
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MobxAngularModule
   ],
   providers: [AuthService, UserService, UserResolver, AuthGuard, HttpService],
   bootstrap: [AppComponent]
