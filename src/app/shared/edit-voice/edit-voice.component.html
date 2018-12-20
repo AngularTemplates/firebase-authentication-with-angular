@@ -5,6 +5,7 @@
       placeholder="Grand Total"
       type="text"
       formControlName="grand_total"
+      value="invoiceData.grand_total"
     />
   </mat-form-field>
   <mat-form-field>
@@ -13,13 +14,26 @@
       placeholder="Paid Amount"
       type="text"
       formControlName="paid_amount"
+      value="invoiceData.paid_amount"
     />
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Due" type="text" formControlName="due" />
+    <input
+      matInput
+      placeholder="Due"
+      type="text"
+      formControlName="due"
+      value="invoiceData.due"
+    />
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Extra" type="text" formControlName="extra" />
+    <input
+      matInput
+      placeholder="Extra"
+      type="text"
+      formControlName="extra"
+      value="invoiceData.extra"
+    />
   </mat-form-field>
   <mat-form-field>
     <input
@@ -27,13 +41,14 @@
       placeholder="Comments"
       type="text"
       formControlName="comments"
+      value="invoiceData.comments"
     />
   </mat-form-field>
 
   <button
     mat-raised-button
     [disabled]="editInvoiceForm.invalid"
-    (click)="editInvoice()"
+    (click)="updateInvoice()"
   >
     Update
   </button>

@@ -15,8 +15,8 @@
           <table mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="customer_name">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-              <td mat-cell class="name col-xs-2" *matCellDef="let customer">
-                {{ customer.customer_name }}
+              <td mat-cell class="name col-xs-2" *matCellDef="let invoice">
+                {{ invoice.customer_name }}
               </td>
             </ng-container>
 
@@ -25,10 +25,10 @@
               <td
                 mat-cell
                 class="description-cell col-xs-4"
-                *matCellDef="let customer"
+                *matCellDef="let invoice"
                 style="color: rgba(22, 188, 218, 0.699);"
               >
-                {{ customer.grand_total_text }}
+                {{ invoice.grand_total_text }}
               </td>
             </ng-container>
 
@@ -37,15 +37,15 @@
               <td
                 mat-cell
                 class="duration-cell col-xs-2"
-                *matCellDef="let customer"
+                *matCellDef="let invoice"
               >
                 <mat-form-field>
                   <input
                     matInput
-                    (keyup.enter)="updateAmount($event.target.value, customer)"
-                    value="{{ customer.paid }}"
+                    (keyup.enter)="updateAmount($event.target.value, invoice)"
+                    value="{{ invoice.paid }}"
                     #amount
-                    [disabled]="customer.is_paid_status ? true : false"
+                    [disabled]="invoice.is_paid_status ? true : false"
                   />
                 </mat-form-field>
               </td>
@@ -55,9 +55,13 @@
               <td
                 mat-cell
                 class="duration-cell col-xs-1"
-                *matCellDef="let customer"
+                *matCellDef="let invoice"
               >
-                <span class="glyphicon glyphicon-edit" #edit></span>
+                <span
+                  class="glyphicon glyphicon-edit"
+                  #edit
+                  (click)="editInvoice(invoice.customer_id)"
+                ></span>
               </td>
             </ng-container>
 
@@ -66,7 +70,7 @@
               <td
                 mat-cell
                 class="duration-cell col-xs-1"
-                *matCellDef="let customer"
+                *matCellDef="let invoice"
               >
                 <span class="glyphicon glyphicon-th-list" #history></span>
               </td>

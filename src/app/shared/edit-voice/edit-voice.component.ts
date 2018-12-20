@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { ActivatedRoute } from '@angular/router';
+import { InvoiceService } from '../../services/invoice.service';
 @Component({
   selector: 'app-edit-voice',
   templateUrl: './edit-voice.component.html',
@@ -9,8 +10,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class EditVoiceComponent implements OnInit {
   editInvoiceForm: FormGroup;
   submitted = false;
-
-  constructor(private formBuilder: FormBuilder) {}
+  customer_id;
+  invoiceData;
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private _invoiceService: InvoiceService
+  ) {}
 
   ngOnInit() {
     // grand_total	grand_total_text	paid_amount	due	extra	is_paid_status	comments
@@ -21,6 +27,11 @@ export class EditVoiceComponent implements OnInit {
       extra: [''],
       comments: ['']
     });
+
+    this.route.params.subscribe(params => {
+      this.customer_id = params.customer_id; // --> Name must match wanted parameter
+      this.invoiceData = this._invoiceService.invoiceList[this.customer_id];
+    });
   }
 
   // convenience getter for easy access to form fields
@@ -28,9 +39,8 @@ export class EditVoiceComponent implements OnInit {
     return this.editInvoiceForm.controls;
   }
 
-  editInvoice() {
+  updateInvoice() {
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.editInvoiceForm.invalid) {
       console.log(this.editInvoiceForm.value);
