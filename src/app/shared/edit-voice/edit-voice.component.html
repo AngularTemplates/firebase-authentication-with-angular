@@ -5,7 +5,7 @@
       placeholder="Grand Total"
       type="text"
       formControlName="grand_total"
-      value="invoiceData.grand_total"
+      [ngModel]="invoiceData.grand_total"
     />
   </mat-form-field>
   <mat-form-field>
@@ -14,7 +14,7 @@
       placeholder="Paid Amount"
       type="text"
       formControlName="paid_amount"
-      value="invoiceData.paid_amount"
+      [ngModel]="invoiceData.paid_amount"
     />
   </mat-form-field>
   <mat-form-field>
@@ -23,7 +23,7 @@
       placeholder="Due"
       type="text"
       formControlName="due"
-      value="invoiceData.due"
+      [ngModel]="invoiceData.due"
     />
   </mat-form-field>
   <mat-form-field>
@@ -32,7 +32,7 @@
       placeholder="Extra"
       type="text"
       formControlName="extra"
-      value="invoiceData.extra"
+      [ngModel]="invoiceData.extra"
     />
   </mat-form-field>
   <mat-form-field>
@@ -41,7 +41,7 @@
       placeholder="Comments"
       type="text"
       formControlName="comments"
-      value="invoiceData.comments"
+      [ngModel]="invoiceData.comments"
     />
   </mat-form-field>
 

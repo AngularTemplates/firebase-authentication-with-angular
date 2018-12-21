@@ -29,7 +29,11 @@ export class InvoiceListComponent implements OnInit {
   dataSource = new MatTableDataSource();
 
   isLoading = false;
-
+  sheetParams = {
+    action: 'read',
+    sheet_name: this._config.customerDetailsPage,
+    page: this._config.paymentDetailsPage
+  };
   constructor(
     private _http: HttpService,
     private _utils: UtilsService,
@@ -37,7 +41,7 @@ export class InvoiceListComponent implements OnInit {
     sanitizer: DomSanitizer,
     private _invoiceService: InvoiceService,
     private router: Router,
-    private config: ConfigService
+    private _config: ConfigService
   ) {
     iconRegistry.addSvgIcon(
       'thumbs-up',
@@ -47,9 +51,20 @@ export class InvoiceListComponent implements OnInit {
     );
   }
   ngOnInit() {
-    this.dataSource.data = this._invoiceService.invoiceList;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this._http.apiGet(this.sheetParams).subscribe(data => {
+      // Object.keys(data['records'])
+      const invoiceArray = [];
+      for (const key in data['records']) {
+        if (key) {
+          invoiceArray.push(data['records'][key]);
+        }
+      }
+      this._invoiceService._invoiceList = data['records'];
+      this.dataSource.data = invoiceArray;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+
     console.log(this.dataSource);
   }
 
@@ -62,7 +77,7 @@ export class InvoiceListComponent implements OnInit {
   updateAmount(amountValue: number, currentInvoice) {
     console.log(amountValue, currentInvoice);
     currentInvoice['paid_amount'] = amountValue;
-    currentInvoice['sheet_name'] = this.config.paymentDetailsPage;
+    currentInvoice['sheet_name'] = this._config.paymentDetailsPage;
     currentInvoice['action'] = 'update';
     currentInvoice['due'] =
       currentInvoice['grand_total'] > amountValue

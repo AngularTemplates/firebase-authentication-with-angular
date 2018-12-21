@@ -27,6 +27,7 @@ import { InvoiceListComponent } from './pages/invoice-list/invoice-list.componen
 
 // services
 import { HttpService } from './services/http.service';
+import { InvoiceService } from './services/invoice.service';
 //  angular material
 import {
   MatFormFieldModule,

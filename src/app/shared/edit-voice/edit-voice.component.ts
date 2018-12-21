@@ -10,7 +10,7 @@ import { InvoiceService } from '../../services/invoice.service';
 export class EditVoiceComponent implements OnInit {
   editInvoiceForm: FormGroup;
   submitted = false;
-  customer_id;
+  invoiceId;
   invoiceData;
   constructor(
     private formBuilder: FormBuilder,
@@ -29,8 +29,8 @@ export class EditVoiceComponent implements OnInit {
     });
 
     this.route.params.subscribe(params => {
-      this.customer_id = params.customer_id; // --> Name must match wanted parameter
-      this.invoiceData = this._invoiceService.invoiceList[this.customer_id];
+      this.invoiceId = params.invoiceid; // --> Name must match wanted parameter
+      this.invoiceData = this._invoiceService.invoiceList[this.invoiceId];
     });
   }
 
