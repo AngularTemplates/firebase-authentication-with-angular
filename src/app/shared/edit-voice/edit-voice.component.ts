@@ -42,8 +42,13 @@ export class EditVoiceComponent implements OnInit {
   updateInvoice() {
     this.submitted = true;
     // stop here if form is invalid
-    if (this.editInvoiceForm.invalid) {
+    if (this.editInvoiceForm.valid) {
       console.log(this.editInvoiceForm.value);
+      this._invoiceService
+        .editInvoice({ ...this.invoiceData, ...this.editInvoiceForm.value })
+        .subscribe(data => {
+          console.log('edit call back', data);
+        });
     }
   }
 }

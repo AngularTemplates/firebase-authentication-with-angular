@@ -33,4 +33,9 @@ export class InvoiceService {
       this._invoiceList = invoiceArray;
     });
   }
+  editInvoice(updateData) {
+    this.sheetParams['action'] = 'update';
+    console.log('update data', { ...updateData, ...this.sheetParams });
+    return this._http.apiGet({ ...updateData, ...updateData });
+  }
 }
