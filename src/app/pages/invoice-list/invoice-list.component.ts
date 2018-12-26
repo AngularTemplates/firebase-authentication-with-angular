@@ -51,7 +51,8 @@ export class InvoiceListComponent implements OnInit {
     );
   }
   ngOnInit() {
-    this._http.apiGet(this.sheetParams).subscribe(data => {
+    this.isLoading = true;
+    this._invoiceService.getInvoiceList().subscribe(data => {
       // Object.keys(data['records'])
       const invoiceArray = [];
       for (const key in data['records']) {
@@ -59,10 +60,11 @@ export class InvoiceListComponent implements OnInit {
           invoiceArray.push(data['records'][key]);
         }
       }
-      this._invoiceService._invoiceList = data['records'];
+      this._invoiceService.saveLocalStroage(data['records']);
       this.dataSource.data = invoiceArray;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.isLoading = false;
     });
 
     console.log(this.dataSource);

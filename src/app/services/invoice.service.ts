@@ -15,23 +15,18 @@ export class InvoiceService {
     this.getInvoiceList();
   }
 
-  _invoiceList;
-  get invoiceList(): boolean {
-    return this._invoiceList;
+  _invoiceList = [];
+  get invoiceList() {
+    console.log(JSON.parse(localStorage.invoiceList));
+    return JSON.parse(localStorage.invoiceList) || this._invoiceList;
   }
 
   getInvoiceList() {
-    return this._http.apiGet(this.sheetParams).subscribe(data => {
-      // Object.keys(data['records'])
-      const invoiceArray = [];
-      for (const key in data['records']) {
-        if (key) {
-          invoiceArray.push(data['records'][key]);
-        }
-      }
-      console.log('Data : ', invoiceArray);
-      this._invoiceList = invoiceArray;
-    });
+    return this._http.apiGet(this.sheetParams);
+  }
+  saveLocalStroage(data) {
+    this._invoiceList = data;
+    localStorage.invoiceList = JSON.stringify(this._invoiceList);
   }
   editInvoice(updateData) {
     this.sheetParams['action'] = 'update';

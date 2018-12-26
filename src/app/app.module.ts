@@ -36,9 +36,13 @@ import {
   MatSortModule,
   MatTableModule
 } from '@angular/material';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { EditVoiceComponent } from './shared/edit-voice/edit-voice.component';
+import { HeaderComponent } from './shared/header/header.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,8 @@ import { EditVoiceComponent } from './shared/edit-voice/edit-voice.component';
     UserComponent,
     RegisterComponent,
     InvoiceListComponent,
-    EditVoiceComponent
+    EditVoiceComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +69,8 @@ import { EditVoiceComponent } from './shared/edit-voice/edit-voice.component';
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
+    MatToolbarModule,
+    MatButtonModule,
     MatIconModule,
     MobxAngularModule
   ],

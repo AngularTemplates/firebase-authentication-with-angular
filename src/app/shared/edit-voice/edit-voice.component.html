@@ -1,55 +1,73 @@
-<form [formGroup]="editInvoiceForm" novalidate>
-  <mat-form-field>
-    <input
-      matInput
-      placeholder="Grand Total"
-      type="text"
-      formControlName="grand_total"
-      [ngModel]="invoiceData.grand_total"
-    />
-  </mat-form-field>
-  <mat-form-field>
-    <input
-      matInput
-      placeholder="Paid Amount"
-      type="text"
-      formControlName="paid_amount"
-      [ngModel]="invoiceData.paid_amount"
-    />
-  </mat-form-field>
-  <mat-form-field>
-    <input
-      matInput
-      placeholder="Due"
-      type="text"
-      formControlName="due"
-      [ngModel]="invoiceData.due"
-    />
-  </mat-form-field>
-  <mat-form-field>
-    <input
-      matInput
-      placeholder="Extra"
-      type="text"
-      formControlName="extra"
-      [ngModel]="invoiceData.extra"
-    />
-  </mat-form-field>
-  <mat-form-field>
-    <input
-      matInput
-      placeholder="Comments"
-      type="text"
-      formControlName="comments"
-      [ngModel]="invoiceData.comments"
-    />
-  </mat-form-field>
+<div class="container edit-container">
+  <div class="row">
+    <form [formGroup]="editInvoiceForm" class="example-form" novalidate>
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Grand Total"
+            type="text"
+            formControlName="grand_total"
+            [ngModel]="invoiceData.grand_total"
+          />
+        </mat-form-field>
+      </div>
 
-  <button
-    mat-raised-button
-    [disabled]="editInvoiceForm.invalid"
-    (click)="updateInvoice()"
-  >
-    Update
-  </button>
-</form>
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Paid Amount"
+            type="text"
+            formControlName="paid_amount"
+            [ngModel]="invoiceData.paid_amount"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Due"
+            type="text"
+            formControlName="due"
+            [ngModel]="invoiceData.due"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Extra"
+            type="text"
+            formControlName="extra"
+            [ngModel]="invoiceData.extra"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Comments"
+            type="text"
+            formControlName="comments"
+            [ngModel]="invoiceData.comments"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <button
+          mat-raised-button
+          [disabled]="editInvoiceForm.invalid"
+          (click)="updateInvoice()"
+        >
+          Update
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
