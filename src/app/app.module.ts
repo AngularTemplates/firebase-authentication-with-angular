@@ -38,11 +38,14 @@ import {
 } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { EditVoiceComponent } from './shared/edit-voice/edit-voice.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { SupplierNameComponent } from './shared/supplier-name/supplier-name.component';
+import { LineNumberComponent } from './shared/line-number/line-number.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,9 @@ import { HeaderComponent } from './shared/header/header.component';
     RegisterComponent,
     InvoiceListComponent,
     EditVoiceComponent,
-    HeaderComponent
+    HeaderComponent,
+    SupplierNameComponent,
+    LineNumberComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +76,7 @@ import { HeaderComponent } from './shared/header/header.component';
     MatProgressSpinnerModule,
     MatToolbarModule,
     MatButtonModule,
+    MatSelectModule,
     MatIconModule,
     MobxAngularModule
   ],
