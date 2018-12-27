@@ -1,28 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-
-export interface Animal {
-  name: string;
-  sound: string;
-}
-
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl
+} from '@angular/forms';
+import { InvoiceService } from '../../services/invoice.service';
 @Component({
   selector: 'app-supplier-name',
   templateUrl: './supplier-name.component.html',
   styleUrls: ['./supplier-name.component.scss']
 })
 export class SupplierNameComponent implements OnInit {
-  constructor() {}
-  animalControl;
-  selectFormControl;
-  animals: Animal[] = [
-    { name: 'Dog', sound: 'Woof!' },
-    { name: 'Cat', sound: 'Meow!' },
-    { name: 'Cow', sound: 'Moo!' },
-    { name: 'Fox', sound: 'Wa-pa-pa-pa-pa-pa-pow!' }
-  ];
+  suppliers;
+  constructor(
+    private _fb: FormBuilder,
+    private _invoiceService: InvoiceService
+  ) {}
+  supplierForm: FormGroup;
   ngOnInit() {
-    this.animalControl = new FormControl('', [Validators.required]);
-    this.selectFormControl = new FormControl('', Validators.required);
+    this.supplierForm = this._fb.group({
+      supplierName: new FormControl(null)
+    });
+    this.getSupplierNames();
+  }
+  getSupplierNames() {
+    console.log(this._invoiceService.supplierList());
+    this.suppliers = this._invoiceService.supplierList();
   }
 }

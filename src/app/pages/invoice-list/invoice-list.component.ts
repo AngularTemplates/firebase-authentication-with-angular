@@ -1,25 +1,25 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpService } from '../../services/http.service';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { UtilsService } from '../../services/utils.service';
-import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material';
-import { InvoiceService } from '../../services/invoice.service';
-import { ConfigService } from '../../services/config.service';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { HttpService } from "../../services/http.service";
+import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
+import { UtilsService } from "../../services/utils.service";
+import { DomSanitizer } from "@angular/platform-browser";
+import { MatIconRegistry } from "@angular/material";
+import { InvoiceService } from "../../services/invoice.service";
+import { ConfigService } from "../../services/config.service";
+import { Router } from "@angular/router";
 @Component({
-  selector: 'app-collection-list',
-  templateUrl: './invoice-list.component.html',
-  styleUrls: ['./invoice-list.component.scss']
+  selector: "app-collection-list",
+  templateUrl: "./invoice-list.component.html",
+  styleUrls: ["./invoice-list.component.scss"]
 })
 export class InvoiceListComponent implements OnInit {
   collectionData = [];
   displayedColumns: string[] = [
-    'customer_name',
-    'grand_total',
-    'paid',
-    'edit',
-    'history'
+    "customer_name",
+    "grand_total",
+    "paid",
+    "edit",
+    "history"
   ];
 
   @ViewChild(MatPaginator)
@@ -30,7 +30,7 @@ export class InvoiceListComponent implements OnInit {
 
   isLoading = false;
   sheetParams = {
-    action: 'read',
+    action: "read",
     sheet_name: this._config.customerDetailsPage,
     page: this._config.paymentDetailsPage
   };
@@ -44,23 +44,19 @@ export class InvoiceListComponent implements OnInit {
     private _config: ConfigService
   ) {
     iconRegistry.addSvgIcon(
-      'thumbs-up',
+      "thumbs-up",
       sanitizer.bypassSecurityTrustResourceUrl(
-        'assets/img/examples/thumbup-icon.svg'
+        "assets/img/examples/thumbup-icon.svg"
       )
     );
   }
   ngOnInit() {
     this.isLoading = true;
     this._invoiceService.getInvoiceList().subscribe(data => {
-      // Object.keys(data['records'])
-      const invoiceArray = [];
-      for (const key in data['records']) {
-        if (key) {
-          invoiceArray.push(data['records'][key]);
-        }
-      }
-      this._invoiceService.saveLocalStroage(data['records']);
+      const invoiceArray = this._invoiceService.getInvoiceArray(
+        data["records"]
+      );
+      this._invoiceService.saveLocalStroage(data["records"]);
       this.dataSource.data = invoiceArray;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -78,21 +74,21 @@ export class InvoiceListComponent implements OnInit {
   }
   updateAmount(amountValue: number, currentInvoice) {
     console.log(amountValue, currentInvoice);
-    currentInvoice['paid_amount'] = amountValue;
-    currentInvoice['sheet_name'] = this._config.paymentDetailsPage;
-    currentInvoice['action'] = 'update';
-    currentInvoice['due'] =
-      currentInvoice['grand_total'] > amountValue
-        ? currentInvoice['grand_total'] - amountValue
+    currentInvoice["paid_amount"] = amountValue;
+    currentInvoice["sheet_name"] = this._config.paymentDetailsPage;
+    currentInvoice["action"] = "update";
+    currentInvoice["due"] =
+      currentInvoice["grand_total"] > amountValue
+        ? currentInvoice["grand_total"] - amountValue
         : 0;
-    currentInvoice['is_paid_status'] = true;
+    currentInvoice["is_paid_status"] = true;
     console.log({ currentInvoice });
     // this._http.apiGet()
     this._http.apiGet(currentInvoice).subscribe(data => {
-      console.log('Return data : ', data);
+      console.log("Return data : ", data);
     });
   }
   editInvoice(customer_id) {
-    this.router.navigate(['/edit-invoice', customer_id]);
+    this.router.navigate(["/edit-invoice", customer_id]);
   }
 }

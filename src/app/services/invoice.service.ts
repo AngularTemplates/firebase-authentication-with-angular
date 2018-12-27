@@ -33,4 +33,18 @@ export class InvoiceService {
     console.log('update data', { ...updateData, ...this.sheetParams });
     return this._http.apiGet({ ...updateData, ...updateData });
   }
+  supplierList() {
+    const invoiceArr = this.getInvoiceArray(this.invoiceList);
+    return [...new Set(invoiceArr.map(item => item.supplier))];
+  }
+
+  getInvoiceArray(invoiceObj) {
+    const invoiceArray = [];
+    for (const key in invoiceObj) {
+      if (key) {
+        invoiceArray.push(invoiceObj[key]);
+      }
+    }
+    return invoiceArray;
+  }
 }
