@@ -1,11 +1,14 @@
-import { Injectable, Input } from '@angular/core';
-import { HttpService } from '../services/http.service';
+import { Injectable } from '@angular/core';
+
 import { ConfigService } from '../services/config.service';
+import { HttpService } from '../services/http.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class InvoiceService {
-  // invoiceList = [];
+  _invoiceList = [];
+  invoiceArray = [];
   sheetParams = {
     action: 'read',
     sheet_name: this._config.customerDetailsPage,
@@ -15,7 +18,6 @@ export class InvoiceService {
     this.getInvoiceList();
   }
 
-  _invoiceList = [];
   get invoiceList() {
     console.log(JSON.parse(localStorage.invoiceList));
     return JSON.parse(localStorage.invoiceList) || this._invoiceList;
@@ -28,23 +30,32 @@ export class InvoiceService {
     this._invoiceList = data;
     localStorage.invoiceList = JSON.stringify(this._invoiceList);
   }
+
+  getInvoiceArray(invoiceObj) {
+    for (const key in invoiceObj) {
+      if (key) {
+        this.invoiceArray.push(invoiceObj[key]);
+      }
+    }
+    return this.invoiceArray;
+  }
+
   editInvoice(updateData) {
     this.sheetParams['action'] = 'update';
     console.log('update data', { ...updateData, ...this.sheetParams });
     return this._http.apiGet({ ...updateData, ...updateData });
   }
+
   supplierList() {
     const invoiceArr = this.getInvoiceArray(this.invoiceList);
     return [...new Set(invoiceArr.map(item => item.supplier))];
   }
 
-  getInvoiceArray(invoiceObj) {
-    const invoiceArray = [];
-    for (const key in invoiceObj) {
-      if (key) {
-        invoiceArray.push(invoiceObj[key]);
-      }
-    }
-    return invoiceArray;
+  getLinesDependOnSupplier(supplier = null) {
+    supplier = 'vinoth';
+    const supplierList = this.invoiceArray.filter(
+      invoice => invoice.supplier === supplier
+    );
+    return [...new Set(supplierList.map(item => item.line_number))];
   }
 }

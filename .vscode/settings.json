@@ -1,0 +1,5 @@
+{
+  "prettier.tslintIntegration": true,
+  "typescriptHero.imports.multiLineWrapThreshold": 1000,
+  "typescriptHero.imports.organizeOnSave": true
+}

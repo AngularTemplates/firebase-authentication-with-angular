@@ -1,3 +1,13 @@
-<p>
-  line-number works!
-</p>
+<form class="example-form" [formGroup]="lineNumbersForm">
+  <h4>Select Line Number{{ lineNumberList | json }}</h4>
+  <mat-form-field>
+    <mat-select placeholder="Select Line Number" formControlName="lineNumbers">
+      <mat-option
+        *ngFor="let lineNumber of lineNumberList"
+        [value]="lineNumber"
+      >
+        {{ lineNumber }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

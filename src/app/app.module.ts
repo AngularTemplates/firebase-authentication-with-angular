@@ -1,52 +1,43 @@
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { rootRouterConfig } from './app.routes';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { MobxAngularModule } from 'mobx-angular';
+
 import { environment } from '../environments/environment';
-import { LoginComponent } from './login/login.component';
-import { UserComponent } from './user/user.component';
-import { RegisterComponent } from './register/register.component';
-import { UserResolver } from './user/user.resolver';
+import { AppComponent } from './app.component';
+import { rootRouterConfig } from './app.routes';
 import { AuthGuard } from './core/auth.guard';
 import { AuthService } from './core/auth.service';
 import { UserService } from './core/user.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MobxAngularModule } from 'mobx-angular';
+import { LoginComponent } from './login/login.component';
+import { InvoiceListComponent } from './pages/invoice-list/invoice-list.component';
+import { RegisterComponent } from './register/register.component';
+import { HttpService } from './services/http.service';
+import { EditVoiceComponent } from './shared/edit-voice/edit-voice.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { LineNumberComponent } from './shared/line-number/line-number.component';
+import { SupplierNameComponent } from './shared/supplier-name/supplier-name.component';
+import { UserComponent } from './user/user.component';
+import { UserResolver } from './user/user.resolver';
 
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
 // page
 // import { LoginComponent } from './pages/login/login.component';
-import { InvoiceListComponent } from './pages/invoice-list/invoice-list.component';
-
 // components
 
 // services
-import { HttpService } from './services/http.service';
-import { InvoiceService } from './services/invoice.service';
 //  angular material
-import {
-  MatFormFieldModule,
-  MatInputModule,
-  MatPaginatorModule,
-  MatSortModule,
-  MatTableModule
-} from '@angular/material';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatIconModule } from '@angular/material/icon';
-import { EditVoiceComponent } from './shared/edit-voice/edit-voice.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { SupplierNameComponent } from './shared/supplier-name/supplier-name.component';
-import { LineNumberComponent } from './shared/line-number/line-number.component';
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+
 import { InvoiceService } from '../../services/invoice.service';
+
 @Component({
   selector: 'app-supplier-name',
   templateUrl: './supplier-name.component.html',
@@ -13,6 +10,7 @@ import { InvoiceService } from '../../services/invoice.service';
 })
 export class SupplierNameComponent implements OnInit {
   suppliers;
+  selectedSupplier = 'vinoth';
   constructor(
     private _fb: FormBuilder,
     private _invoiceService: InvoiceService
