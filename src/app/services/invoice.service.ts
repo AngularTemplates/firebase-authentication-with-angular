@@ -26,12 +26,15 @@ export class InvoiceService {
   getInvoiceList() {
     return this._http.apiGet(this.sheetParams);
   }
+  getInvoiceArray() {
+    return this.invoiceArray;
+  }
   saveLocalStroage(data) {
     this._invoiceList = data;
     localStorage.invoiceList = JSON.stringify(this._invoiceList);
   }
 
-  getInvoiceArray(invoiceObj) {
+  createInvoiceArray(invoiceObj) {
     for (const key in invoiceObj) {
       if (key) {
         this.invoiceArray.push(invoiceObj[key]);
@@ -46,16 +49,35 @@ export class InvoiceService {
     return this._http.apiGet({ ...updateData, ...updateData });
   }
 
-  supplierList() {
-    const invoiceArr = this.getInvoiceArray(this.invoiceList);
-    return [...new Set(invoiceArr.map(item => item.supplier))];
+  supplierList(supplier) {
+    if (supplier === 'all') {
+      return ['all', ...new Set(this.invoiceArray.map(item => item.supplier))];
+    } else {
+      return [...new Set(this.invoiceArray.map(item => item.supplier))];
+    }
   }
 
-  getLinesDependOnSupplier(supplier = null) {
-    supplier = 'vinoth';
+  getLinesDependOnSupplier(supplier) {
     const supplierList = this.invoiceArray.filter(
       invoice => invoice.supplier === supplier
     );
-    return [...new Set(supplierList.map(item => item.line_number))];
+    return ['all', , ...new Set(supplierList.map(item => item.line_number))];
+  }
+
+  getFilterData(supplier, lineNumber) {
+    if (supplier === 'all') {
+      return this.invoiceArray;
+    } else {
+      const supplierDependInvocieArray = this.invoiceArray.filter(
+        item => item.supplier === supplier
+      );
+      if (lineNumber === 'all') {
+        return supplierDependInvocieArray;
+      } else {
+        return supplierDependInvocieArray.filter(
+          item => item.line_number === lineNumber
+        );
+      }
+    }
   }
 }

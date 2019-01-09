@@ -20,10 +20,10 @@ export class SupplierNameComponent implements OnInit {
     this.supplierForm = this._fb.group({
       supplierName: new FormControl(null)
     });
-    this.getSupplierNames();
+    // this.getSupplierNames();
   }
-  getSupplierNames() {
-    console.log(this._invoiceService.supplierList());
-    this.suppliers = this._invoiceService.supplierList();
-  }
+  // getSupplierNames() {
+  //   console.log(this._invoiceService.supplierList());
+  //   this.suppliers = this._invoiceService.supplierList();
+  // }
 }

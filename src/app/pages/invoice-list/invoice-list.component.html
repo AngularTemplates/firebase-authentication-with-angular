@@ -1,10 +1,30 @@
 <div class="container">
-  <div class="row">
+  <!-- <div class="row">
     <div class="col"><app-supplier-name></app-supplier-name></div>
-  </div>
+  </div> -->
   <div class="row">
     <div class="col">
       <div class="course">
+        <h4>Select supplier</h4>
+        <mat-form-field>
+          <mat-select (selectionChange)="changeSupplier($event)">
+            <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
+              {{ supplier }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <h4>Select line number</h4>
+        <mat-form-field>
+          <mat-select (selectionChange)="changeLine($event)">
+            <mat-option
+              *ngFor="let lineNumber of lineNumberList"
+              [value]="lineNumber"
+            >
+              {{ lineNumber }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <h4>Select Customer</h4>
         <mat-form-field>
           <input
             matInput
