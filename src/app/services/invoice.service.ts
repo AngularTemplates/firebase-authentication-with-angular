@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 
 import { ConfigService } from '../services/config.service';
 import { HttpService } from '../services/http.service';
@@ -24,7 +25,13 @@ export class InvoiceService {
   }
 
   getInvoiceList() {
-    return this._http.apiGet(this.sheetParams);
+    return this._http.apiGet(this.sheetParams).pipe(
+      map(invoice => {
+        this._invoiceList = invoice['records'];
+        this.invoiceArray = this.createInvoiceArray(this._invoiceList);
+        return this.invoiceArray;
+      })
+    );
   }
   getInvoiceArray() {
     return this.invoiceArray;

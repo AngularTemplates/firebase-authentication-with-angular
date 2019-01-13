@@ -60,11 +60,8 @@ export class InvoiceListComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this._invoiceService.getInvoiceList().subscribe(data => {
-      this._invoiceService.saveLocalStroage(data['records']);
-      this._invoiceService.createInvoiceArray(data['records']);
-      const invoiceArray = this._invoiceService.getInvoiceArray();
       if (this.supplierName === 'all' && this.lineNumber === 'all') {
-        this.dataSource.data = invoiceArray;
+        this.dataSource.data = data;
       }
       this.supplierName = this.supplierName;
       this.lineNumber = this.lineNumber;
