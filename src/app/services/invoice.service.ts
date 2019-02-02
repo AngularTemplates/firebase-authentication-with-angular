@@ -29,6 +29,7 @@ export class InvoiceService {
       map(invoice => {
         this._invoiceList = invoice['records'];
         this.invoiceArray = this.createInvoiceArray(this._invoiceList);
+        this.saveLocalStroage(this._invoiceList);
         return this.invoiceArray;
       })
     );
@@ -57,11 +58,7 @@ export class InvoiceService {
   }
 
   supplierList(supplier) {
-    if (supplier === 'all') {
-      return ['all', ...new Set(this.invoiceArray.map(item => item.supplier))];
-    } else {
-      return [...new Set(this.invoiceArray.map(item => item.supplier))];
-    }
+    return ['all', ...new Set(this.invoiceArray.map(item => item.supplier))];
   }
 
   getLinesDependOnSupplier(supplier) {

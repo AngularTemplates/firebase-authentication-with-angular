@@ -31,8 +31,9 @@ export class InvoiceListComponent implements OnInit {
 
   isLoading = false;
 
-  supplierName = 'all';
-  lineNumber = 'all';
+  supplierName;
+  lineNumber;
+  disableLineNumber = false;
   lineNumberList;
   suppliers;
 
@@ -60,15 +61,27 @@ export class InvoiceListComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this._invoiceService.getInvoiceList().subscribe(data => {
-      if (this.supplierName === 'all' && this.lineNumber === 'all') {
-        this.dataSource.data = data;
+      this.supplierName = localStorage.supplierName
+        ? JSON.parse(localStorage.supplierName)
+        : 'all';
+      if (this.supplierName === 'all') {
+        this.disableLineNumber = true;
       }
-      this.supplierName = this.supplierName;
-      this.lineNumber = this.lineNumber;
+      this.lineNumber = localStorage.lineNumber
+        ? JSON.parse(localStorage.lineNumber)
+        : 'all';
       this.suppliers = this._invoiceService.supplierList(this.supplierName);
       this.lineNumberList = this._invoiceService.getLinesDependOnSupplier(
         this.supplierName
       );
+      if (this.supplierName === 'all' && this.lineNumber === 'all') {
+        this.dataSource.data = data;
+      } else {
+        this.dataSource.data = this._invoiceService.getFilterData(
+          this.supplierName,
+          this.lineNumber
+        );
+      }
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.isLoading = false;
@@ -105,6 +118,11 @@ export class InvoiceListComponent implements OnInit {
   changeSupplier(supplier) {
     console.log('supplier : ', supplier.value);
     this.supplierName = supplier.value;
+    localStorage.supplierName = JSON.stringify(this.supplierName);
+    this.disableLineNumber = false;
+    if (this.supplierName === 'all') {
+      this.disableLineNumber = true;
+    }
     this.dataSource.data = this._invoiceService.getFilterData(
       this.supplierName,
       'all'
@@ -116,6 +134,7 @@ export class InvoiceListComponent implements OnInit {
   changeLine(lineNumber) {
     console.log('supplier : ', lineNumber.value);
     this.lineNumber = lineNumber.value;
+    localStorage.lineNumber = JSON.stringify(this.lineNumber);
     this.dataSource.data = this._invoiceService.getFilterData(
       this.supplierName,
       this.lineNumber

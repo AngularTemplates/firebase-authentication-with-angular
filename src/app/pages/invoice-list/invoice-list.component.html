@@ -7,7 +7,10 @@
       <div class="course">
         <h4>Select supplier</h4>
         <mat-form-field>
-          <mat-select (selectionChange)="changeSupplier($event)">
+          <mat-select
+            (selectionChange)="changeSupplier($event)"
+            [(value)]="supplierName"
+          >
             <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
               {{ supplier }}
             </mat-option>
@@ -15,7 +18,11 @@
         </mat-form-field>
         <h4>Select line number</h4>
         <mat-form-field>
-          <mat-select (selectionChange)="changeLine($event)">
+          <mat-select
+            (selectionChange)="changeLine($event)"
+            [disabled]="disableLineNumber"
+            [(value)]="lineNumber"
+          >
             <mat-option
               *ngFor="let lineNumber of lineNumberList"
               [value]="lineNumber"
