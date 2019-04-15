@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import 'rxjs/add/operator/toPromise';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 
 @Injectable()
