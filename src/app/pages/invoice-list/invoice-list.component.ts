@@ -87,7 +87,7 @@ export class InvoiceListComponent implements OnInit {
       this.isLoading = false;
     });
 
-    console.log(this.dataSource);
+    // console.log(this.dataSource);
   }
 
   applyFilter(filterValue: string) {
