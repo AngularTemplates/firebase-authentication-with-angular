@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map } from 'rxjs/operators/map';
 
+import { Constants } from '../config';
 import { ConfigService } from '../services/config.service';
 import { HttpService } from '../services/http.service';
 
@@ -8,14 +9,18 @@ import { HttpService } from '../services/http.service';
   providedIn: 'root'
 })
 export class InvoiceService {
-  _invoiceList = [];
+  _invoiceList;
   invoiceArray = [];
   sheetParams = {
     action: 'read',
     sheet_name: this._config.customerDetailsPage,
     page: this._config.paymentDetailsPage
   };
-  constructor(private _http: HttpService, private _config: ConfigService) {
+  constructor(
+    private _http: HttpService,
+    private _config: ConfigService,
+    private _confignew: Constants
+  ) {
     this.getInvoiceList();
   }
 
@@ -25,9 +30,9 @@ export class InvoiceService {
   }
 
   getInvoiceList() {
-    return this._http.apiGet(this.sheetParams).pipe(
+    return this._http.apiGet(this._confignew.INVOICE).pipe(
       map(invoice => {
-        this._invoiceList = invoice['records'];
+        this._invoiceList = invoice;
         this.invoiceArray = this.createInvoiceArray(this._invoiceList);
         this.saveLocalStroage(this._invoiceList);
         return this.invoiceArray;
@@ -48,6 +53,14 @@ export class InvoiceService {
         this.invoiceArray.push(invoiceObj[key]);
       }
     }
+    this.invoiceArray = this.invoiceArray.sort((a, b) => {
+      if (a.supplier === b.supplier) {
+        // Price is only important when cities are the same
+        return a.order > b.order ? 1 : b.order > a.order ? -1 : 0;
+      }
+      return a.supplier > b.supplier ? 1 : b.supplier > a.supplier ? -1 : 0;
+    });
+    console.log(this.invoiceArray);
     return this.invoiceArray;
   }
 

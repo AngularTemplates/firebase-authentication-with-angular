@@ -5,8 +5,6 @@ import { Constants } from '../config';
 
 @Injectable()
 export class HttpService {
-  apiUrl =
-    'https://script.google.com/macros/s/AKfycbyjtV76UmxnDR2Y3uVrpyvTADFhC2aukmUuWzRpwNPyi--sIwc/exec?';
   _siteUrl;
   constructor(private _http: HttpClient, private _config: Constants) {
     this._siteUrl = this._config.BEURL;
