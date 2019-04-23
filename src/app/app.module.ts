@@ -27,6 +27,8 @@ import { RegisterComponent } from './register/register.component';
 import { HttpService } from './services/http.service';
 import { EditVoiceComponent } from './shared/edit-voice/edit-voice.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { LineNumberComponent } from './shared/line-number/line-number.component';
+import { SupplierNameComponent } from './shared/supplier-name/supplier-name.component';
 import { UserComponent } from './user/user.component';
 import { UserResolver } from './user/user.resolver';
 
@@ -47,6 +49,8 @@ import { UserResolver } from './user/user.resolver';
     RegisterComponent,
     InvoiceListComponent,
     EditVoiceComponent,
+    LineNumberComponent,
+    SupplierNameComponent,
     HeaderComponent
   ],
   imports: [
