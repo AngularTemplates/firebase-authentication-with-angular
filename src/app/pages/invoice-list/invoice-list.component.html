@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container invoice-container">
   <!-- <div class="row">
     <div class="col"><app-supplier-name></app-supplier-name></div>
   </div> -->
@@ -7,10 +7,7 @@
       <div class="course">
         <h4>Select supplier</h4>
         <mat-form-field>
-          <mat-select
-            (selectionChange)="changeSupplier($event)"
-            [(value)]="supplierName"
-          >
+          <mat-select (selectionChange)="changeSupplier($event)" [(value)]="supplierName">
             <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
               {{ supplier }}
             </mat-option>
@@ -18,91 +15,40 @@
         </mat-form-field>
         <h4>Select line number</h4>
         <mat-form-field>
-          <mat-select
-            (selectionChange)="changeLine($event)"
-            [disabled]="disableLineNumber"
-            [(value)]="lineNumber"
-          >
-            <mat-option
-              *ngFor="let lineNumber of lineNumberList"
-              [value]="lineNumber"
-            >
+          <mat-select (selectionChange)="changeLine($event)" [disabled]="disableLineNumber" [(value)]="lineNumber">
+            <mat-option *ngFor="let lineNumber of lineNumberList" [value]="lineNumber">
               {{ lineNumber }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <h4>Select Customer</h4>
         <mat-form-field>
-          <input
-            matInput
-            (keyup)="applyFilter($event.target.value)"
-            placeholder="Search Customers"
-            #input
-          />
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Customers" #input />
         </mat-form-field>
 
-        <div class="mat-elevation-z8">
-          <table mat-table [dataSource]="dataSource" matSort>
+        <div class="mat-elevation-z8 table-responsive">
+          <table mat-table [dataSource]="dataSource" matSort class="table-bordered">
             <ng-container matColumnDef="customer_name">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-              <td mat-cell class="name col-xs-2" *matCellDef="let invoice">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col">Name</th>
+              <td mat-cell class="name col" *matCellDef="let invoice">
                 {{ invoice.customer_name }}
               </td>
             </ng-container>
 
-            <ng-container matColumnDef="grand_total">
-              <th mat-header-cell *matHeaderCellDef>Grant Total</th>
-              <td
-                mat-cell
-                class="description-cell col-xs-4"
-                *matCellDef="let invoice"
-                style="color: rgba(22, 188, 218, 0.699);"
-              >
-                {{ invoice.grand_total_text }}
+            <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef class="col">Total</th>
+              <td mat-cell class="total col" *matCellDef="let invoice" style="color: rgba(22, 188, 218, 0.699);">
+                {{ invoice.invoice.payment[0].amount }}
               </td>
             </ng-container>
 
-            <ng-container matColumnDef="paid">
-              <th mat-header-cell *matHeaderCellDef>Paid</th>
-              <td
-                mat-cell
-                class="duration-cell col-xs-2"
-                *matCellDef="let invoice"
-              >
+            <ng-container matColumnDef="pay">
+              <th mat-header-cell *matHeaderCellDef class="col">Pay</th>
+              <td mat-cell class="pay col" *matCellDef="let invoice">
                 <mat-form-field>
-                  <input
-                    matInput
-                    (keyup.enter)="updateAmount($event.target.value, invoice)"
-                    value="{{ invoice.paid }}"
-                    #amount
-                    [disabled]="invoice.is_paid_status ? true : false"
-                  />
+                  <input matInput (keyup.enter)="updateAmount($event.target.value, invoice)" value="{{ invoice.paid }}"
+                    #amount [disabled]="invoice.is_paid_status ? true : false" />
                 </mat-form-field>
-              </td>
-            </ng-container>
-            <ng-container matColumnDef="edit">
-              <th mat-header-cell *matHeaderCellDef>Edit</th>
-              <td
-                mat-cell
-                class="duration-cell col-xs-1"
-                *matCellDef="let invoice"
-              >
-                <span
-                  class="glyphicon glyphicon-edit"
-                  #edit
-                  (click)="editInvoice(invoice.customer_id)"
-                ></span>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="history">
-              <th mat-header-cell *matHeaderCellDef>Histoty</th>
-              <td
-                mat-cell
-                class="duration-cell col-xs-1"
-                *matCellDef="let invoice"
-              >
-                <span class="glyphicon glyphicon-th-list" #history></span>
               </td>
             </ng-container>
 
@@ -110,10 +56,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
           </table>
 
-          <div
-            *ngIf="isLoading"
-            style="display: flex; justify-content: center; align-items: center"
-          >
+          <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
             <h2>Loading...</h2>
           </div>
           <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

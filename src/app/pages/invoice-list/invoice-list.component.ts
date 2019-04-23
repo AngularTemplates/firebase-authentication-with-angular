@@ -3,7 +3,6 @@ import { MatIconRegistry, MatPaginator, MatSort, MatTableDataSource } from '@ang
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { ConfigService } from '../../services/config.service';
 import { HttpService } from '../../services/http.service';
 import { InvoiceService } from '../../services/invoice.service';
 import { UtilsService } from '../../services/utils.service';
@@ -15,13 +14,7 @@ import { UtilsService } from '../../services/utils.service';
 })
 export class InvoiceListComponent implements OnInit {
   collectionData = [];
-  displayedColumns: string[] = [
-    'customer_name',
-    'grand_total',
-    'paid',
-    'edit',
-    'history'
-  ];
+  displayedColumns: string[] = ['customer_name', 'total', 'pay'];
 
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
@@ -37,19 +30,13 @@ export class InvoiceListComponent implements OnInit {
   lineNumberList;
   suppliers;
 
-  sheetParams = {
-    action: 'read',
-    sheet_name: this._config.customerDetailsPage,
-    page: this._config.paymentDetailsPage
-  };
   constructor(
     private _http: HttpService,
     private _utils: UtilsService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     private _invoiceService: InvoiceService,
-    private router: Router,
-    private _config: ConfigService
+    private router: Router
   ) {
     iconRegistry.addSvgIcon(
       'thumbs-up',
@@ -99,7 +86,7 @@ export class InvoiceListComponent implements OnInit {
   updateAmount(amountValue: number, currentInvoice) {
     console.log(amountValue, currentInvoice);
     currentInvoice['paid_amount'] = amountValue;
-    currentInvoice['sheet_name'] = this._config.paymentDetailsPage;
+    // currentInvoice['sheet_name'] = this._config.paymentDetailsPage;
     currentInvoice['action'] = 'update';
     currentInvoice['due'] =
       currentInvoice['grand_total'] > amountValue
