@@ -83,20 +83,15 @@ export class InvoiceListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  updateAmount(amountValue: number, currentInvoice) {
-    console.log(amountValue, currentInvoice);
-    currentInvoice['paid_amount'] = amountValue;
-    // currentInvoice['sheet_name'] = this._config.paymentDetailsPage;
-    currentInvoice['action'] = 'update';
-    currentInvoice['due'] =
-      currentInvoice['grand_total'] > amountValue
-        ? currentInvoice['grand_total'] - amountValue
-        : 0;
-    currentInvoice['is_paid_status'] = true;
-    console.log({ currentInvoice });
-    // this._http.apiGet()
-    this._http.apiGet(currentInvoice).subscribe(data => {
-      console.log('Return data : ', data);
+  updateAmount(amountValue: number, customer) {
+    console.log(amountValue, customer['_id']);
+    const customerInvoice = {};
+    customerInvoice['amount'] = -amountValue;
+    customerInvoice['customerDocId'] = customer['_id'];
+    console.log(customerInvoice);
+
+    this._invoiceService.updateInvoice(customerInvoice).subscribe(res => {
+      console.log('Update Invoice : ', res);
     });
   }
   editInvoice(customer_id) {

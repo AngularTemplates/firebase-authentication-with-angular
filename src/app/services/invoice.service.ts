@@ -25,7 +25,7 @@ export class InvoiceService {
   }
 
   getInvoiceList() {
-    return this._http.apiGet(this._confignew.INVOICE).pipe(
+    return this._http.apiGet(`${this._confignew.INVOICE}get_invoice`).pipe(
       map(invoice => {
         this._invoiceList = invoice;
         this.invoiceArray = this.createInvoiceArray(this._invoiceList);
@@ -91,5 +91,10 @@ export class InvoiceService {
         );
       }
     }
+  }
+
+  // udpate invoice of the cus
+  updateInvoice(customerInvoice) {
+    return this._http.apiPost('update_invoice', customerInvoice);
   }
 }
