@@ -8,4 +8,5 @@ export class Constants {
   CUSTOMER = 'customer';
   CUSTOMERS = 'customers';
   INVOICE = 'invoice/';
+  UPDATEINVOICE = 'update_invoice';
 }

@@ -95,6 +95,9 @@ export class InvoiceService {
 
   // udpate invoice of the cus
   updateInvoice(customerInvoice) {
-    return this._http.apiPost('update_invoice', customerInvoice);
+    return this._http.apiPost(
+      `${this._confignew.INVOICE}${this._confignew.UPDATEINVOICE}`,
+      customerInvoice
+    );
   }
 }
