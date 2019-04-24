@@ -47,32 +47,7 @@ export class InvoiceListComponent implements OnInit {
   }
   ngOnInit() {
     this.isLoading = true;
-    this._invoiceService.getInvoiceList().subscribe(data => {
-      this.supplierName = localStorage.supplierName
-        ? JSON.parse(localStorage.supplierName)
-        : 'all';
-      if (this.supplierName === 'all') {
-        this.disableLineNumber = true;
-      }
-      this.lineNumber = localStorage.lineNumber
-        ? JSON.parse(localStorage.lineNumber)
-        : 'all';
-      this.suppliers = this._invoiceService.supplierList(this.supplierName);
-      this.lineNumberList = this._invoiceService.getLinesDependOnSupplier(
-        this.supplierName
-      );
-      if (this.supplierName === 'all' && this.lineNumber === 'all') {
-        this.dataSource.data = data;
-      } else {
-        this.dataSource.data = this._invoiceService.getFilterData(
-          this.supplierName,
-          this.lineNumber
-        );
-      }
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.isLoading = false;
-    });
+    this.getInvoice();
 
     // console.log(this.dataSource);
   }
@@ -84,12 +59,9 @@ export class InvoiceListComponent implements OnInit {
     }
   }
   updateAmount(amountValue: number, customer) {
-    console.log(amountValue, customer['_id']);
     const customerInvoice = {};
     customerInvoice['amount'] = -amountValue;
     customerInvoice['customerDocId'] = customer['_id'];
-    console.log(customerInvoice);
-
     this._invoiceService.updateInvoice(customerInvoice).subscribe(res => {
       console.log('Update Invoice : ', res);
     });
@@ -121,5 +93,34 @@ export class InvoiceListComponent implements OnInit {
       this.supplierName,
       this.lineNumber
     );
+  }
+
+  getInvoice() {
+    this._invoiceService.getInvoiceList().subscribe(data => {
+      this.supplierName = localStorage.supplierName
+        ? JSON.parse(localStorage.supplierName)
+        : 'all';
+      if (this.supplierName === 'all') {
+        this.disableLineNumber = true;
+      }
+      this.lineNumber = localStorage.lineNumber
+        ? JSON.parse(localStorage.lineNumber)
+        : 'all';
+      this.suppliers = this._invoiceService.supplierList(this.supplierName);
+      this.lineNumberList = this._invoiceService.getLinesDependOnSupplier(
+        this.supplierName
+      );
+      if (this.supplierName === 'all' && this.lineNumber === 'all') {
+        this.dataSource.data = data;
+      } else {
+        this.dataSource.data = this._invoiceService.getFilterData(
+          this.supplierName,
+          this.lineNumber
+        );
+      }
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.isLoading = false;
+    });
   }
 }
