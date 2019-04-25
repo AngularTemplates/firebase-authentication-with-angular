@@ -14,6 +14,7 @@ import { UtilsService } from '../../services/utils.service';
 })
 export class InvoiceListComponent implements OnInit {
   collectionData = [];
+  currentInvoiceList = [];
   displayedColumns: string[] = ['customer_name', 'total', 'pay'];
 
   @ViewChild(MatPaginator)
@@ -48,8 +49,6 @@ export class InvoiceListComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this.getInvoice();
-
-    // console.log(this.dataSource);
   }
 
   applyFilter(filterValue: string) {
@@ -71,7 +70,6 @@ export class InvoiceListComponent implements OnInit {
     this.router.navigate(['/edit-invoice', customer_id]);
   }
   changeSupplier(supplier) {
-    console.log('supplier : ', supplier.value);
     this.supplierName = supplier.value;
     localStorage.supplierName = JSON.stringify(this.supplierName);
     this.disableLineNumber = false;
@@ -87,7 +85,6 @@ export class InvoiceListComponent implements OnInit {
     );
   }
   changeLine(lineNumber) {
-    console.log('supplier : ', lineNumber.value);
     this.lineNumber = lineNumber.value;
     localStorage.lineNumber = JSON.stringify(this.lineNumber);
     this.dataSource.data = this._invoiceService.getFilterData(
@@ -119,9 +116,19 @@ export class InvoiceListComponent implements OnInit {
           this.lineNumber
         );
       }
+      this.currentInvoiceList = this.dataSource.data;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.isLoading = false;
     });
+  }
+
+  filterNotPaidCustomer(isPaid) {
+    if (isPaid.checked) {
+      this.dataSource.data = this.currentInvoiceList.filter(
+        customer => customer.invoice.payment[0].amount > 0
+      );
+    }
+    this.dataSource.data = this.currentInvoiceList;
   }
 }

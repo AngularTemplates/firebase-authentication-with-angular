@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
@@ -69,6 +70,7 @@ import { UserResolver } from './user/user.resolver';
     MatSortModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
+    MatCheckboxModule,
     MatButtonModule,
     MatSelectModule,
     MatIconModule,
