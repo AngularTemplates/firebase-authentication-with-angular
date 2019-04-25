@@ -64,6 +64,7 @@ export class InvoiceListComponent implements OnInit {
     customerInvoice['customerDocId'] = customer['_id'];
     this._invoiceService.updateInvoice(customerInvoice).subscribe(res => {
       console.log('Update Invoice : ', res);
+      this.getInvoice();
     });
   }
   editInvoice(customer_id) {

@@ -25,6 +25,7 @@ export class InvoiceService {
   }
 
   getInvoiceList() {
+    this.invoiceArray = [];
     return this._http.apiGet(`${this._confignew.INVOICE}get_invoice`).pipe(
       map(invoice => {
         this._invoiceList = invoice;
