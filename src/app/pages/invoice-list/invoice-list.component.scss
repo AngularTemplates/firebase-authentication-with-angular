@@ -1,0 +1,16 @@
+.invoice-container {
+  margin-top: 5rem;
+
+  .pay input {
+    width: 50px;
+    margin-left: 1rem;
+  }
+
+  .total p {
+    padding: 0 1rem;
+  }
+}
+
+.pay>mat-form-field>.mat-form-field-wrapper>.mat-form-field-flex>.mat-form-field-infix {
+  width: 100px !important;
+}

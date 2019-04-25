@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators/map';
 
 import { Constants } from '../config';
-import { ConfigService } from '../services/config.service';
 import { HttpService } from '../services/http.service';
 
 @Injectable({
@@ -13,14 +12,10 @@ export class InvoiceService {
   invoiceArray = [];
   sheetParams = {
     action: 'read',
-    sheet_name: this._config.customerDetailsPage,
-    page: this._config.paymentDetailsPage
+    sheet_name: 'this._config.customerDetailsPage',
+    page: 'this._config.paymentDetailsPage'
   };
-  constructor(
-    private _http: HttpService,
-    private _config: ConfigService,
-    private _confignew: Constants
-  ) {
+  constructor(private _http: HttpService, private _confignew: Constants) {
     this.getInvoiceList();
   }
 
@@ -30,7 +25,8 @@ export class InvoiceService {
   }
 
   getInvoiceList() {
-    return this._http.apiGet(this._confignew.INVOICE).pipe(
+    this.invoiceArray = [];
+    return this._http.apiGet(`${this._confignew.INVOICE}get_invoice`).pipe(
       map(invoice => {
         this._invoiceList = invoice;
         this.invoiceArray = this.createInvoiceArray(this._invoiceList);
@@ -96,5 +92,13 @@ export class InvoiceService {
         );
       }
     }
+  }
+
+  // udpate invoice of the cus
+  updateInvoice(customerInvoice) {
+    return this._http.apiPost(
+      `${this._confignew.INVOICE}${this._confignew.UPDATEINVOICE}`,
+      customerInvoice
+    );
   }
 }
