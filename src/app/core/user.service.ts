@@ -33,7 +33,7 @@ export class UserService {
         displayName: value.name,
         photoURL: user.photoURL
       }).then(res => {
-        resolve(res)
+        resolve(res);
       }, err => reject(err))
     })
   }
