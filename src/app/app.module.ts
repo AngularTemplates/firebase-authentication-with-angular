@@ -32,6 +32,7 @@ import { LineNumberComponent } from './shared/line-number/line-number.component'
 import { SupplierNameComponent } from './shared/supplier-name/supplier-name.component';
 import { UserComponent } from './user/user.component';
 import { UserResolver } from './user/user.resolver';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 // import { LineNumberComponent } from './shared/line-number/line-number.component';
 // import { SupplierNameComponent } from './shared/supplier-name/supplier-name.component';
@@ -74,7 +75,8 @@ import { UserResolver } from './user/user.resolver';
     MatButtonModule,
     MatSelectModule,
     MatIconModule,
-    MobxAngularModule
+    MobxAngularModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AuthService, UserService, UserResolver, AuthGuard, HttpService],
   bootstrap: [AppComponent]

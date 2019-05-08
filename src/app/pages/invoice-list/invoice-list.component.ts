@@ -47,7 +47,6 @@ export class InvoiceListComponent implements OnInit {
     );
   }
   ngOnInit() {
-    this.isLoading = true;
     this.getInvoice();
   }
 
@@ -62,7 +61,6 @@ export class InvoiceListComponent implements OnInit {
     customerInvoice['amount'] = -amountValue;
     customerInvoice['customerDocId'] = customer['_id'];
     this._invoiceService.updateInvoice(customerInvoice).subscribe(res => {
-      console.log('Update Invoice : ', res);
       this.getInvoice();
     });
   }
@@ -94,6 +92,7 @@ export class InvoiceListComponent implements OnInit {
   }
 
   getInvoice() {
+    this.isLoading = true;
     this._invoiceService.getInvoiceList().subscribe(data => {
       this.supplierName = localStorage.supplierName
         ? JSON.parse(localStorage.supplierName)
