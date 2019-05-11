@@ -46,7 +46,7 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header class="col">
                 Name
               </th>
-              <td mat-cell class="name col pl-2" *matCellDef="let invoice">
+              <td mat-cell class="name col pl-2" *matCellDef="let invoice" (click)="currentCustomer(invoice)">
                 {{ invoice.customer_name }}
               </td>
             </ng-container>

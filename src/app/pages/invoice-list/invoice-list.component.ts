@@ -81,6 +81,7 @@ export class InvoiceListComponent implements OnInit {
     this.lineNumberList = this._invoiceService.getLinesDependOnSupplier(
       this.supplierName
     );
+    this.currentInvoiceList = this.dataSource.data;
   }
   changeLine(lineNumber) {
     this.lineNumber = lineNumber.value;
@@ -89,6 +90,7 @@ export class InvoiceListComponent implements OnInit {
       this.supplierName,
       this.lineNumber
     );
+    this.currentInvoiceList = this.dataSource.data;
   }
 
   getInvoice() {
@@ -128,6 +130,8 @@ export class InvoiceListComponent implements OnInit {
         customer => customer.invoice.payment[0].amount > 0
       );
     }
-    this.dataSource.data = this.currentInvoiceList;
+  }
+  currentCustomer(currentCustomer) {
+    console.log('Customer : ', currentCustomer);
   }
 }
