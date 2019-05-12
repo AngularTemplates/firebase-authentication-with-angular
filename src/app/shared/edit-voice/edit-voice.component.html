@@ -1,74 +1,52 @@
 <div class="container edit-container">
-  <div class="row">
-    <h1>DAta : {{ invoiceData }}</h1>
-    <form [formGroup]="editInvoiceForm" class="example-form" novalidate>
-      <div class="col">
-        <mat-form-field class="example-full-width">
-          <input
-            matInput
-            placeholder="Grand Total"
-            type="text"
-            formControlName="grand_total"
-            [ngModel]="invoiceData.grand_total"
-          />
-        </mat-form-field>
+  <form [formGroup]="editInvoiceForm" class="example-form row" novalidate>
+    <div class="form-group col-12">
+      <label for="customer_name">customer_name:</label>
+      <input type="text" class="form-control" id="customer_name" formControlName="customer_name"
+        [value]="invoiceData.customer_name">
+    </div>
+    <div class="form-group col-12">
+      <label for="supplier">supplier:</label>
+      <input type="text" class="form-control" id="supplier" formControlName="supplier" [value]="invoiceData.supplier">
+    </div>
+    <div class="dropdown">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        Dropdown button
+      </button>
+      <!-- <div class="dropdown-menu" *ngFor="let supplier of suppliers"> -->
+      <div class="dropdown-menu">
+        <a class="dropdown-item">upplier</a>
       </div>
-
-      <div class="col">
-        <mat-form-field class="example-full-width">
-          <input
-            matInput
-            placeholder="Paid Amount"
-            type="text"
-            formControlName="paid_amount"
-            [ngModel]="invoiceData.paid_amount"
-          />
-        </mat-form-field>
-      </div>
-
-      <div class="col">
-        <mat-form-field class="example-full-width">
-          <input
-            matInput
-            placeholder="Due"
-            type="text"
-            formControlName="due"
-            [ngModel]="invoiceData.due"
-          />
-        </mat-form-field>
-      </div>
-
-      <div class="col">
-        <mat-form-field class="example-full-width">
-          <input
-            matInput
-            placeholder="Extra"
-            type="text"
-            formControlName="extra"
-            [ngModel]="invoiceData.extra"
-          />
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <mat-form-field class="example-full-width">
-          <input
-            matInput
-            placeholder="Comments"
-            type="text"
-            formControlName="comments"
-            [ngModel]="invoiceData.comments"
-          />
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <button
-          mat-raised-button
-          [disabled]="editInvoiceForm.invalid"
-          (click)="updateInvoice()"
-        >
-          Update
-        </button>
-      </div>
-    </form>
-  </div>
+    </div>
+    <div class="form-group col-12">
+      <label for="order">order:</label>
+      <input type="text" class="form-control" id="order" formControlName="order" [value]="invoiceData.order">
+    </div>
+    <div class="form-group col-12">
+      <label for="30days_amount">30days_amount:</label>
+      <input type="text" class="form-control" id="30days_amount" formControlName="30days_amount"
+        [value]="invoiceData['30days_amount']">
+    </div>
+    <div class="form-group col-12">
+      <label for="31days_amount">31days_amount:</label>
+      <input type="text" class="form-control" id="31days_amount" formControlName="31days_amount"
+        [value]="invoiceData['31days_amount']">
+    </div>
+    <ng-container *ngIf="invoiceData && invoiceData.invoice && invoiceData.invoice.payment">
+      <ng-container *ngFor="let payment of invoiceData.invoice.payment">
+        <div class="col-12 pb-2">
+          <div class="card bg-primary text-white">
+            <div class="card-body">
+              {{payment.timestamp | date}} - {{payment.amount}}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+    <div class="col mb-3 mt-2">
+      <button mat-raised-button [disabled]="editInvoiceForm.invalid" (click)="updateInvoice()">
+        Update
+      </button>
+    </div>
+  </form>
 </div>

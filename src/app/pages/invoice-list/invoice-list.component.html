@@ -1,90 +1,90 @@
 <div class="invoice-container">
-  <!-- <div class="row">
-    <div class="col"><app-supplier-name></app-supplier-name></div>
-  </div> -->
+  <div class="row mb-2">
+    <div class="col">
+      <button class="btn bg-success text-white float-right" [routerLink]="['/edit-invoice',0]">New
+        Customer</button>
+    </div>
+  </div>
   <div class="row">
     <div class="col">
-      <div class="course">
-        <div class="form-group mb-0">
-          <p class="mb-0">Select supplier</p>
-          <mat-form-field>
-            <mat-select (selectionChange)="changeSupplier($event)" [(value)]="supplierName">
-              <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
-                {{ supplier }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="form-group mb-0">
-          <p class="mb-0">Select line number</p>
-          <mat-form-field>
-            <mat-select (selectionChange)="changeLine($event)" [disabled]="disableLineNumber" [(value)]="lineNumber">
-              <mat-option *ngFor="let lineNumber of lineNumberList" [value]="lineNumber">
-                {{ lineNumber }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
+      <div class="form-group  mb-0">
+        <p class="mb-0">Select supplier</p>
+        <mat-form-field class="col-12">
+          <mat-select (selectionChange)="changeSupplier($event)" [(value)]="supplierName">
+            <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
+              {{ supplier }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-group mb-0">
+        <p class="mb-0">Select line number</p>
+        <mat-form-field class="col-12">
+          <mat-select (selectionChange)="changeLine($event)" [disabled]="disableLineNumber" [(value)]="lineNumber">
+            <mat-option *ngFor="let lineNumber of lineNumberList" [value]="lineNumber">
+              {{ lineNumber }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-        <div class="form-group mb-0">
-          <section class="example-section">
-            <mat-checkbox class="example-margin" (change)="filterNotPaidCustomer($event)">Show Paid Customer
-              Only
-            </mat-checkbox>
-          </section>
-        </div>
+      <div class="form-group mb-0">
+        <section class="example-section">
+          <mat-checkbox class="example-margin" (change)="filterNotPaidCustomer($event)">Show Paid Customer Only
+          </mat-checkbox>
+        </section>
+      </div>
 
-        <div class="form-group mb-0">
-          <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Customers" #input />
-          </mat-form-field>
-        </div>
+      <div class="form-group mb-0">
+        <mat-form-field class="col-12">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Customers" #input />
+        </mat-form-field>
+      </div>
 
-        <div class="mat-elevation-z8 table-responsive mb-4">
-          <table mat-table [dataSource]="dataSource" matSort class="table-bordered">
-            <ng-container matColumnDef="customer_name">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col">
-                Name
-              </th>
-              <td mat-cell class="name col pl-2" *matCellDef="let invoice" (click)="currentCustomer(invoice)">
-                {{ invoice.customer_name }}
-              </td>
-            </ng-container>
+      <div class="mat-elevation-z8 table-responsive mb-4">
+        <table mat-table [dataSource]="dataSource" matSort class="table-bordered">
+          <ng-container matColumnDef="customer_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col">
+              Name
+            </th>
+            <td mat-cell class="name col pl-2" *matCellDef="let invoice" [routerLink]="['/edit-invoice', invoice._id]">
+              <u>{{ invoice.customer_name }}</u>
+            </td>
+          </ng-container>
 
-            <ng-container matColumnDef="total">
-              <th mat-header-cell *matHeaderCellDef class="col text-center">
-                Total
-              </th>
-              <td mat-cell class="total col" *matCellDef="let invoice" style="color: rgba(22, 188, 218, 0.699);">
-                <p class="text-center">
-                  {{ invoice.invoice.payment[0].amount }}
-                </p>
-              </td>
-            </ng-container>
+          <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef class="col text-center">
+              Total
+            </th>
+            <td mat-cell class="total col" *matCellDef="let invoice" style="color: rgba(22, 188, 218, 0.699);">
+              <p class="text-center">
+                {{ invoice.invoice.payment[0].amount }}
+              </p>
+            </td>
+          </ng-container>
 
-            <ng-container matColumnDef="pay">
-              <th mat-header-cell *matHeaderCellDef class="col text-center">
-                Pay
-              </th>
-              <td mat-cell class="pay col" *matCellDef="let invoice">
-                <!-- <mat-form-field>
+          <ng-container matColumnDef="pay">
+            <th mat-header-cell *matHeaderCellDef class="col text-crenter">
+              Pay
+            </th>
+            <td mat-cell class="pay col" *matCellDef="let invoice">
+              <!-- <mat-form-field>
                   <input matInput (keyup.enter)="updateAmount($event.target.value, invoice)" value="{{ invoice.paid }}"
                     #amount [disabled]="invoice.is_paid_status ? true : false" />
                 </mat-form-field> -->
-                <input type="text" class="form-control form-control-sm"
-                  (keyup.enter)="updateAmount($event.target.value, invoice)" />
-              </td>
-            </ng-container>
+              <input type="text" class="form-control form-control-sm"
+                (keyup.enter)="updateAmount($event.target.value, invoice)" />
+            </td>
+          </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-          </table>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
 
-          <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
-            <h2>Loading...</h2>
-          </div>
-          <mat-paginator [pageSizeOptions]="[25, 100]"></mat-paginator>
+        <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+          <h2>Loading...</h2>
         </div>
+        <mat-paginator [pageSizeOptions]="[25, 100]"></mat-paginator>
       </div>
     </div>
   </div>

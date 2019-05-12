@@ -9,4 +9,5 @@ export class Constants {
   CUSTOMERS = 'customers';
   INVOICE = 'invoice/';
   UPDATEINVOICE = 'update_invoice';
+  SUPPLIERS = ['suresh', 'vinoth', 'basker'];
 }

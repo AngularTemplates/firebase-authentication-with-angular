@@ -60,12 +60,6 @@ export class InvoiceService {
     return this.invoiceArray;
   }
 
-  editInvoice(updateData) {
-    this.sheetParams['action'] = 'update';
-    console.log('update data', { ...updateData, ...this.sheetParams });
-    return this._http.apiGet({ ...updateData, ...updateData });
-  }
-
   supplierList(supplier) {
     return ['all', ...new Set(this.invoiceArray.map(item => item.supplier))];
   }
@@ -100,5 +94,15 @@ export class InvoiceService {
       `${this._confignew.INVOICE}${this._confignew.UPDATEINVOICE}`,
       customerInvoice
     );
+  }
+
+  getInvoiceUsingId(invoiceId) {
+    return this._http.apiGet(`${this._confignew.CUSTOMER}/${invoiceId}`);
+  }
+
+  editInvoice(updateData) {
+    this.sheetParams['action'] = 'update';
+    console.log('update data', { ...updateData, ...this.sheetParams });
+    return this._http.apiGet({ ...updateData, ...updateData });
   }
 }

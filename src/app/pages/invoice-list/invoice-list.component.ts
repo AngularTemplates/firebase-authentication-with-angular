@@ -129,9 +129,8 @@ export class InvoiceListComponent implements OnInit {
       this.dataSource.data = this.currentInvoiceList.filter(
         customer => customer.invoice.payment[0].amount > 0
       );
+    } else {
+      this.dataSource.data = this.currentInvoiceList;
     }
-  }
-  currentCustomer(currentCustomer) {
-    console.log('Customer : ', currentCustomer);
   }
 }
