@@ -5,18 +5,17 @@
       <input type="text" class="form-control" id="customer_name" formControlName="customer_name"
         [value]="invoiceData.customer_name">
     </div>
-    <div class="form-group col-12">
-      <label for="supplier">supplier:</label>
-      <input type="text" class="form-control" id="supplier" formControlName="supplier" [value]="invoiceData.supplier">
-    </div>
-    <div class="dropdown">
-      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-        Dropdown button
-      </button>
-      <!-- <div class="dropdown-menu" *ngFor="let supplier of suppliers"> -->
-      <div class="dropdown-menu">
-        <a class="dropdown-item">upplier</a>
-      </div>
+
+    <div class="col-12">
+      <h4>Select Supplier</h4>
+      <mat-form-field>
+        <mat-label>Select Supplier</mat-label>
+        <mat-select [(value)]="invoiceData.supplier" formControlName="supplier">
+          <mat-option *ngFor="let supplier of suppliers" [value]="supplier.value">
+            {{supplier.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <div class="form-group col-12">
       <label for="order">order:</label>
@@ -32,6 +31,12 @@
       <input type="text" class="form-control" id="31days_amount" formControlName="31days_amount"
         [value]="invoiceData['31days_amount']">
     </div>
+
+    <div class="col mb-3 mt-2">
+      <button class="btn btn-primary" [disabled]="editInvoiceForm.invalid" (click)="updateInvoice()">
+        Update
+      </button>
+    </div>
     <ng-container *ngIf="invoiceData && invoiceData.invoice && invoiceData.invoice.payment">
       <ng-container *ngFor="let payment of invoiceData.invoice.payment">
         <div class="col-12 pb-2">
@@ -43,10 +48,5 @@
         </div>
       </ng-container>
     </ng-container>
-    <div class="col mb-3 mt-2">
-      <button mat-raised-button [disabled]="editInvoiceForm.invalid" (click)="updateInvoice()">
-        Update
-      </button>
-    </div>
   </form>
 </div>

@@ -16,12 +16,21 @@ export class EditVoiceComponent implements OnInit {
   invoiceId;
   invoiceData;
   suppliers = this._config.SUPPLIERS;
+  foods = [];
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private _invoiceService: InvoiceService,
     private _config: Constants
-  ) {}
+  ) {
+    this.invoiceData = {
+      '30days_amount': '',
+      '31days_amount': '',
+      customer_name: '',
+      supplier: '',
+      order: ''
+    };
+  }
 
   ngOnInit() {
     // grand_total	grand_total_text	paid_amount	due	extra	is_paid_status	comments
@@ -35,15 +44,16 @@ export class EditVoiceComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.invoiceId = params.id; // --> Name must match wanted parameter
-      if (this.invoiceId === 0) {
+      if (this.invoiceId === '0') {
         this.invoiceData = {
-          '30days_amount': 'a',
-          '31days_amount': 'a',
-          customer_name: 'a',
-          supplier: 'a',
-          order: 'a'
+          '30days_amount': '',
+          '31days_amount': '',
+          customer_name: '',
+          supplier: '',
+          order: ''
         };
       } else {
+        console.log('Imas');
         this._invoiceService
           .getInvoiceUsingId(this.invoiceId)
           .subscribe(data => {
@@ -65,12 +75,36 @@ export class EditVoiceComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     if (this.editInvoiceForm.valid) {
-      console.log(this.editInvoiceForm.value);
-      // this._invoiceService
-      //   .editInvoice({ ...this.invoiceData, ...this.editInvoiceForm.value })
-      //   .subscribe(data => {
-      //     console.log('edit call back', data);
-      //   });
+      const formData = this.editInvoiceForm.value;
+
+      if (this.invoiceData['_id']) {
+        this.invoiceData['30days_amount'] = formData['30days_amount']
+          ? formData['30days_amount']
+          : this.invoiceData['30days_amount'];
+        this.invoiceData['31days_amount'] = formData['31days_amount']
+          ? formData['31days_amount']
+          : this.invoiceData['31days_amount'];
+        this.invoiceData['customer_name'] = formData['customer_name']
+          ? formData['customer_name']
+          : this.invoiceData['customer_name'];
+        this.invoiceData['order'] = formData['order']
+          ? formData['order']
+          : this.invoiceData['order'];
+        this.invoiceData['supplier'] = formData['supplier']
+          ? formData['supplier']
+          : this.invoiceData['supplier'];
+      } else {
+        this.invoiceData['30days_amount'] = formData['30days_amount'];
+        this.invoiceData['31days_amount'] = formData['31days_amount'];
+        this.invoiceData['customer_name'] = formData['customer_name'];
+        this.invoiceData['order'] = formData['order'];
+        this.invoiceData['supplier'] = formData['supplier'];
+      }
+      this._invoiceService
+        .createAndUpdateCustomer({ ...this.invoiceData })
+        .subscribe(data => {
+          console.log('edit call back', data);
+        });
     }
   }
 }

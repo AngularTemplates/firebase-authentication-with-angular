@@ -11,6 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -32,7 +33,6 @@ import { LineNumberComponent } from './shared/line-number/line-number.component'
 import { SupplierNameComponent } from './shared/supplier-name/supplier-name.component';
 import { UserComponent } from './user/user.component';
 import { UserResolver } from './user/user.resolver';
-import { ServiceWorkerModule } from '@angular/service-worker';
 
 // import { LineNumberComponent } from './shared/line-number/line-number.component';
 // import { SupplierNameComponent } from './shared/supplier-name/supplier-name.component';
@@ -76,8 +76,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     MatSelectModule,
     MatIconModule,
     MobxAngularModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production
+    })
   ],
+
   providers: [AuthService, UserService, UserResolver, AuthGuard, HttpService],
   bootstrap: [AppComponent]
 })

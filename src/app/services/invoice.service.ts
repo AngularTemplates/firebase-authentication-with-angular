@@ -100,6 +100,10 @@ export class InvoiceService {
     return this._http.apiGet(`${this._confignew.CUSTOMER}/${invoiceId}`);
   }
 
+  createAndUpdateCustomer(customerData) {
+    return this._http.apiPost(`${this._confignew.CUSTOMER}`, customerData);
+  }
+
   editInvoice(updateData) {
     this.sheetParams['action'] = 'update';
     console.log('update data', { ...updateData, ...this.sheetParams });

@@ -9,5 +9,9 @@ export class Constants {
   CUSTOMERS = 'customers';
   INVOICE = 'invoice/';
   UPDATEINVOICE = 'update_invoice';
-  SUPPLIERS = ['suresh', 'vinoth', 'basker'];
+  SUPPLIERS = [
+    { value: 'suresh', viewValue: 'suresh' },
+    { value: 'vinoth', viewValue: 'vinoth' },
+    { value: 'basker', viewValue: 'basker' }
+  ];
 }
