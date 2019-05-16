@@ -57,8 +57,11 @@
               Total
             </th>
             <td mat-cell class="total col" *matCellDef="let invoice" style="color: rgba(22, 188, 218, 0.699);">
-              <p class="text-center">
+              <p class="text-center" *ngIf="invoice.invoice">
                 {{ invoice.invoice.payment[0].amount }}
+              </p>
+              <p class="text-center" *ngIf="!invoice.invoice">
+                -
               </p>
             </td>
           </ng-container>

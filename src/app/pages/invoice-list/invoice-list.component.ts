@@ -127,7 +127,8 @@ export class InvoiceListComponent implements OnInit {
   filterNotPaidCustomer(isPaid) {
     if (isPaid.checked) {
       this.dataSource.data = this.currentInvoiceList.filter(
-        customer => customer.invoice.payment[0].amount > 0
+        customer =>
+          (customer.invoice ? customer.invoice.payment[0].amount : 0) > 0
       );
     } else {
       this.dataSource.data = this.currentInvoiceList;
