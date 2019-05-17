@@ -12,6 +12,10 @@ export class Constants {
   SUPPLIERS = [
     { value: 'suresh', viewValue: 'suresh' },
     { value: 'vinoth', viewValue: 'vinoth' },
-    { value: 'basker', viewValue: 'basker' }
+    { value: 'baskar', viewValue: 'baskar' }
+  ];
+  PAYMENT_TYPES = [
+    { value: 'pm', viewValue: 'pm' },
+    { value: 'lm', viewValue: 'lm' }
   ];
 }

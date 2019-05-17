@@ -31,6 +31,22 @@
       <input type="text" class="form-control" id="31days_amount" formControlName="31days_amount"
         [value]="invoiceData['31days_amount']">
     </div>
+    <div class="col-12">
+      <h4>Select payment type</h4>
+      <mat-form-field>
+        <mat-label>Select payment type</mat-label>
+        <mat-select [(value)]="invoiceData.payment_type" formControlName="payment_type">
+          <mat-option *ngFor="let payment_type of payment_types" [value]="payment_type.value">
+            {{payment_type.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-12">
+      <label for="milk_count">milk_count:</label>
+      <input type="text" class="form-control" id="milk_count" formControlName="milk_count"
+        [value]="invoiceData['milk_count']">
+    </div>
 
     <div class="col mb-3 mt-2">
       <button class="btn btn-primary" [disabled]="editInvoiceForm.invalid" (click)="updateInvoice()">

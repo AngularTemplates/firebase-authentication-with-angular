@@ -16,6 +16,7 @@ export class EditVoiceComponent implements OnInit {
   invoiceId;
   invoiceData;
   suppliers = this._config.SUPPLIERS;
+  payment_types = this._config.PAYMENT_TYPES;
   foods = [];
   constructor(
     private formBuilder: FormBuilder,
@@ -28,7 +29,9 @@ export class EditVoiceComponent implements OnInit {
       '31days_amount': '',
       customer_name: '',
       supplier: '',
-      order: ''
+      order: '',
+      payment_type: '',
+      milk_count: ''
     };
   }
 
@@ -39,7 +42,9 @@ export class EditVoiceComponent implements OnInit {
       '31days_amount': [''],
       customer_name: [''],
       supplier: [''],
-      order: ['']
+      order: [''],
+      payment_type: [''],
+      milk_count: ['']
     });
 
     this.route.params.subscribe(params => {
@@ -50,7 +55,9 @@ export class EditVoiceComponent implements OnInit {
           '31days_amount': '',
           customer_name: '',
           supplier: '',
-          order: ''
+          order: '',
+          payment_type: '',
+          milk_count: ''
         };
       } else {
         console.log('Imas');
@@ -93,12 +100,20 @@ export class EditVoiceComponent implements OnInit {
         this.invoiceData['supplier'] = formData['supplier']
           ? formData['supplier']
           : this.invoiceData['supplier'];
+        this.invoiceData['payment_type'] = formData['payment_type']
+          ? formData['payment_type']
+          : this.invoiceData['payment_type'];
+        this.invoiceData['milk_count'] = formData['milk_count']
+          ? formData['milk_count']
+          : this.invoiceData['milk_count'];
       } else {
         this.invoiceData['30days_amount'] = formData['30days_amount'];
         this.invoiceData['31days_amount'] = formData['31days_amount'];
         this.invoiceData['customer_name'] = formData['customer_name'];
         this.invoiceData['order'] = formData['order'];
         this.invoiceData['supplier'] = formData['supplier'];
+        this.invoiceData['payment_type'] = formData['payment_type'];
+        this.invoiceData['milk_count'] = formData['milk_count'];
       }
       this._invoiceService
         .createAndUpdateCustomer({ ...this.invoiceData })
