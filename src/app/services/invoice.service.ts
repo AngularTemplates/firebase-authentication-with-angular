@@ -109,4 +109,12 @@ export class InvoiceService {
     console.log('update data', { ...updateData, ...this.sheetParams });
     return this._http.apiGet({ ...updateData, ...updateData });
   }
+
+  // update extra and minus amount of the customer
+  updateExtraAndMinusAmount(customerInvoice) {
+    return this._http.apiPost(
+      `${this._confignew.CUSTOMER}${this._confignew.UPDATEEXTRAANDMINUSAMOUNT}`,
+      customerInvoice
+    );
+  }
 }

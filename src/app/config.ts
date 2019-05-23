@@ -9,6 +9,7 @@ export class Constants {
   CUSTOMERS = 'customers';
   INVOICE = 'invoice/';
   UPDATEINVOICE = 'update_invoice';
+  UPDATEEXTRAANDMINUSAMOUNT = '/extra-and-minus-milk';
   SUPPLIERS = [
     { value: 'suresh', viewValue: 'suresh' },
     { value: 'vinoth', viewValue: 'vinoth' },

@@ -15,7 +15,13 @@ import { UtilsService } from '../../services/utils.service';
 export class InvoiceListComponent implements OnInit {
   collectionData = [];
   currentInvoiceList = [];
-  displayedColumns: string[] = ['customer_name', 'total', 'pay'];
+  displayedColumns: string[] = [
+    'customer_name',
+    'total',
+    'pay',
+    'extra',
+    'minus'
+  ];
 
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
@@ -30,6 +36,7 @@ export class InvoiceListComponent implements OnInit {
   disableLineNumber = false;
   lineNumberList;
   suppliers;
+  showMonthlyTextBox: boolean;
 
   constructor(
     private _http: HttpService,
@@ -48,6 +55,13 @@ export class InvoiceListComponent implements OnInit {
   }
   ngOnInit() {
     this.getInvoice();
+    this.showMonthlyTextBox = localStorage.showMonthlyTextBox
+      ? JSON.parse(localStorage.showMonthlyTextBox)
+      : false;
+    this.displayedColumns = ['customer_name', 'total', 'pay'];
+    if (this.showMonthlyTextBox) {
+      this.displayedColumns = ['customer_name', 'total', 'extra', 'minus'];
+    }
   }
 
   applyFilter(filterValue: string) {
@@ -56,13 +70,25 @@ export class InvoiceListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  updateAmount(amountValue: number, customer) {
+  updateAmount(amountValue: number, customer, type) {
     const customerInvoice = {};
-    customerInvoice['amount'] = -amountValue;
-    customerInvoice['customerDocId'] = customer['_id'];
-    this._invoiceService.updateInvoice(customerInvoice).subscribe(res => {
-      this.getInvoice();
-    });
+
+    customerInvoice['amount'] = amountValue;
+    if (type === 'invoice_amount') {
+      customerInvoice['customerDocId'] = customer['_id'];
+      customerInvoice['amount'] = -amountValue;
+      this._invoiceService.updateInvoice(customerInvoice).subscribe(res => {
+        this.getInvoice();
+      });
+    } else {
+      customerInvoice['id'] = customer['_id'];
+      customerInvoice['operation'] = type;
+      this._invoiceService
+        .updateExtraAndMinusAmount(customerInvoice)
+        .subscribe(res => {
+          console.log(res);
+        });
+    }
   }
   editInvoice(customer_id) {
     this.router.navigate(['/edit-invoice', customer_id]);
@@ -132,6 +158,17 @@ export class InvoiceListComponent implements OnInit {
       );
     } else {
       this.dataSource.data = this.currentInvoiceList;
+    }
+  }
+
+  findDailyMonthUpdate(event) {
+    this.showMonthlyTextBox = false;
+    localStorage.showMonthlyTextBox = false;
+    this.displayedColumns = ['customer_name', 'total', 'pay'];
+    if (event.checked) {
+      this.showMonthlyTextBox = true;
+      localStorage.showMonthlyTextBox = true;
+      this.displayedColumns = ['customer_name', 'total', 'extra', 'minus'];
     }
   }
 }

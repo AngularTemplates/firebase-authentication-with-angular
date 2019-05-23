@@ -1,5 +1,13 @@
 <div class="invoice-container">
   <div class="row mb-2">
+
+    <div class="col">
+      <section class="example-section">
+        Extra/Minus
+        <mat-slide-toggle class="example-margin" (change)="findDailyMonthUpdate($event)">
+        </mat-slide-toggle>
+      </section>
+    </div>
     <div class="col">
       <button class="btn bg-success text-white float-right" [routerLink]="['/edit-invoice',0]">New
         Customer</button>
@@ -71,15 +79,30 @@
               Pay
             </th>
             <td mat-cell class="pay col" *matCellDef="let invoice">
-              <!-- <mat-form-field>
-                  <input matInput (keyup.enter)="updateAmount($event.target.value, invoice)" value="{{ invoice.paid }}"
-                    #amount [disabled]="invoice.is_paid_status ? true : false" />
-                </mat-form-field> -->
               <input type="text" class="form-control form-control-sm"
-                (keyup.enter)="updateAmount($event.target.value, invoice)" />
+                (keyup.enter)="updateAmount($event.target.value, invoice, 'invoice_amount')" />
             </td>
           </ng-container>
 
+          <ng-container matColumnDef="extra">
+            <th mat-header-cell *matHeaderCellDef class="col text-crenter">
+              Extra
+            </th>
+            <td mat-cell class="pay col" *matCellDef="let invoice">
+              <input type="text" class="form-control form-control-sm"
+                (keyup.enter)="updateAmount($event.target.value, invoice, 'extra_amount')" />
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="minus">
+            <th mat-header-cell *matHeaderCellDef class="col text-crenter">
+              Minus
+            </th>
+            <td mat-cell class="pay col" *matCellDef="let invoice">
+              <input type="text" class="form-control form-control-sm"
+                (keyup.enter)="updateAmount($event.target.value, invoice, 'minus_amount')" />
+            </td>
+          </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>

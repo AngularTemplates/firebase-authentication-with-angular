@@ -7,6 +7,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -75,6 +76,7 @@ import { UserResolver } from './user/user.resolver';
     MatButtonModule,
     MatSelectModule,
     MatIconModule,
+    MatSlideToggleModule,
     MobxAngularModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
