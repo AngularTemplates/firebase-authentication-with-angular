@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -77,6 +78,7 @@ import { UserResolver } from './user/user.resolver';
     MatSelectModule,
     MatIconModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
     MobxAngularModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production

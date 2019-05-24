@@ -37,6 +37,8 @@ export class InvoiceListComponent implements OnInit {
   lineNumberList;
   suppliers;
   showMonthlyTextBox: boolean;
+  minus_milk_value = '';
+  extra_milk_value = '';
 
   constructor(
     private _http: HttpService,
@@ -87,6 +89,9 @@ export class InvoiceListComponent implements OnInit {
         .updateExtraAndMinusAmount(customerInvoice)
         .subscribe(res => {
           console.log(res);
+          this._utils.openSnackBar('Update successfully!');
+          this.minus_milk_value = '';
+          this.extra_milk_value = '';
         });
     }
   }
@@ -162,13 +167,15 @@ export class InvoiceListComponent implements OnInit {
   }
 
   findDailyMonthUpdate(event) {
-    this.showMonthlyTextBox = false;
-    localStorage.showMonthlyTextBox = false;
-    this.displayedColumns = ['customer_name', 'total', 'pay'];
     if (event.checked) {
       this.showMonthlyTextBox = true;
       localStorage.showMonthlyTextBox = true;
       this.displayedColumns = ['customer_name', 'total', 'extra', 'minus'];
+    } else {
+      this.showMonthlyTextBox = false;
+      localStorage.showMonthlyTextBox = false;
+      this.displayedColumns = ['customer_name', 'total', 'pay'];
     }
+    return this.showMonthlyTextBox;
   }
 }
