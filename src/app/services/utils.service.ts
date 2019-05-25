@@ -11,7 +11,7 @@ export class UtilsService {
     return UUID.UUID();
   }
   openSnackBar(message) {
-    this.snackBar.open(message, 'undo', {
+    this.snackBar.open(message, '', {
       duration: 3000
     });
   }

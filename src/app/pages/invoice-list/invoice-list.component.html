@@ -123,10 +123,12 @@
             </th>
             <td mat-cell class="pay col" *matCellDef="let invoice">
               <input
-                type="text"
+                type="number"
+                #pay
                 class="form-control form-control-sm"
                 (keyup.enter)="
-                  updateAmount($event.target.value, invoice, 'invoice_amount')
+                  updateAmount($event.target.value, invoice, 'invoice_amount');
+                  pay.value = ''
                 "
               />
             </td>
@@ -138,12 +140,12 @@
             </th>
             <td mat-cell class="pay col" *matCellDef="let invoice">
               <input
-                type="text"
-                id="extra_milk"
+                type="number"
+                #extra
                 class="extra_and_minus form-control form-control-sm"
-                [(value)]="extra_milk_value"
                 (keyup.enter)="
-                  updateAmount($event.target.value, invoice, 'extra_amount')
+                  updateAmount($event.target.value, invoice, 'extra_amount');
+                  extra.value = ''
                 "
               />
             </td>
@@ -155,12 +157,12 @@
             </th>
             <td mat-cell class="pay col" *matCellDef="let invoice">
               <input
-                type="text"
-                id="minus_milk"
-                [(value)]="minus_milk_value"
+                type="number"
+                #minus
                 class="extra_and_minus form-control form-control-sm"
                 (keyup.enter)="
-                  updateAmount($event.target.value, invoice, 'minus_amount')
+                  updateAmount($event.target.value, invoice, 'minus_amount');
+                  minus.value = ''
                 "
               />
             </td>
