@@ -15,4 +15,13 @@ export class UtilsService {
       duration: 3000
     });
   }
+
+  // [{id:1, name:'a'}, {id:2, name:'a'}] => ['1':{id:1, name:'a'}, '2':{id:2, name:'a'}]
+  /*  */
+  convertEntityData(invoiceArray) {
+    return invoiceArray.reduce(function(obj, invoice) {
+      obj[invoice.key] = invoice;
+      return obj;
+    }, {});
+  }
 }

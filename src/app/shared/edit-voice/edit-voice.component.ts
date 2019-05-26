@@ -18,6 +18,7 @@ export class EditVoiceComponent implements OnInit {
   suppliers = this._config.SUPPLIERS;
   payment_types = this._config.PAYMENT_TYPES;
   foods = [];
+  step = 0;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -121,5 +122,17 @@ export class EditVoiceComponent implements OnInit {
           console.log('edit call back', data);
         });
     }
+  }
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
   }
 }

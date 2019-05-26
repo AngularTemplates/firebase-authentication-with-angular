@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
@@ -79,6 +80,7 @@ import { UserResolver } from './user/user.resolver';
     MatIconModule,
     MatSlideToggleModule,
     MatSnackBarModule,
+    MatExpansionModule,
     MobxAngularModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
