@@ -68,7 +68,7 @@ export class InvoiceService {
     const supplierList = this.invoiceArray.filter(
       invoice => invoice.supplier === supplier
     );
-    return ['all', , ...new Set(supplierList.map(item => item.line_number))];
+    return ['all', , ...new Set(supplierList.map(item => item.line))];
   }
 
   getFilterData(supplier, lineNumber) {
@@ -82,7 +82,7 @@ export class InvoiceService {
         return supplierDependInvocieArray;
       } else {
         return supplierDependInvocieArray.filter(
-          item => item.line_number === lineNumber
+          item => item.line === lineNumber
         );
       }
     }

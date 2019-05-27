@@ -16,7 +16,14 @@ export class Constants {
     { value: 'baskar', viewValue: 'baskar' }
   ];
   PAYMENT_TYPES = [
-    { value: 'pm', viewValue: 'pm' },
-    { value: 'lm', viewValue: 'lm' }
+    { value: 'PM', viewValue: 'PM' },
+    { value: 'LM', viewValue: 'PM' }
+  ];
+
+  LINES = [
+    { value: 'line1', viewValue: 'line1' },
+    { value: 'line2', viewValue: 'line2' },
+    { value: 'krishna nagar', viewValue: 'krishna nagar' },
+    { value: 'church line', viewValue: 'church line' }
   ];
 }

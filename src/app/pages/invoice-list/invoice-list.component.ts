@@ -15,13 +15,7 @@ import { UtilsService } from '../../services/utils.service';
 export class InvoiceListComponent implements OnInit {
   collectionData = [];
   currentInvoiceList = [];
-  displayedColumns: string[] = [
-    'customer_name',
-    'total',
-    'pay',
-    'extra',
-    'minus'
-  ];
+  displayedColumns: string[] = ['name', 'total', 'pay', 'extra', 'minus'];
 
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
@@ -60,9 +54,9 @@ export class InvoiceListComponent implements OnInit {
     this.showMonthlyTextBox = localStorage.showMonthlyTextBox
       ? JSON.parse(localStorage.showMonthlyTextBox)
       : false;
-    this.displayedColumns = ['customer_name', 'total', 'pay'];
+    this.displayedColumns = ['name', 'total', 'pay'];
     if (this.showMonthlyTextBox) {
-      this.displayedColumns = ['customer_name', 'total', 'extra', 'minus'];
+      this.displayedColumns = ['name', 'total', 'extra', 'minus'];
     }
   }
 
@@ -170,11 +164,11 @@ export class InvoiceListComponent implements OnInit {
     if (event.checked) {
       this.showMonthlyTextBox = true;
       localStorage.showMonthlyTextBox = true;
-      this.displayedColumns = ['customer_name', 'total', 'extra', 'minus'];
+      this.displayedColumns = ['name', 'total', 'extra', 'minus'];
     } else {
       this.showMonthlyTextBox = false;
       localStorage.showMonthlyTextBox = false;
-      this.displayedColumns = ['customer_name', 'total', 'pay'];
+      this.displayedColumns = ['name', 'total', 'pay'];
     }
     return this.showMonthlyTextBox;
   }

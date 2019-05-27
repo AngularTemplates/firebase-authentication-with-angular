@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Constants } from '../../config';
 import { InvoiceService } from '../../services/invoice.service';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-edit-voice',
@@ -17,19 +18,22 @@ export class EditVoiceComponent implements OnInit {
   invoiceData;
   suppliers = this._config.SUPPLIERS;
   payment_types = this._config.PAYMENT_TYPES;
+  lines = this._config.LINES;
   foods = [];
   step = 0;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private _invoiceService: InvoiceService,
-    private _config: Constants
+    private _config: Constants,
+    private _util: UtilsService
   ) {
     this.invoiceData = {
       '30days_amount': '',
       '31days_amount': '',
-      customer_name: '',
+      name: '',
       supplier: '',
+      line: '',
       order: '',
       payment_type: '',
       milk_count: ''
@@ -41,8 +45,9 @@ export class EditVoiceComponent implements OnInit {
     this.editInvoiceForm = this.formBuilder.group({
       '30days_amount': [''],
       '31days_amount': [''],
-      customer_name: [''],
+      name: [''],
       supplier: [''],
+      line: [''],
       order: [''],
       payment_type: [''],
       milk_count: ['']
@@ -54,8 +59,9 @@ export class EditVoiceComponent implements OnInit {
         this.invoiceData = {
           '30days_amount': '',
           '31days_amount': '',
-          customer_name: '',
+          name: '',
           supplier: '',
+          line: '',
           order: '',
           payment_type: '',
           milk_count: ''
@@ -92,15 +98,18 @@ export class EditVoiceComponent implements OnInit {
         this.invoiceData['31days_amount'] = formData['31days_amount']
           ? formData['31days_amount']
           : this.invoiceData['31days_amount'];
-        this.invoiceData['customer_name'] = formData['customer_name']
-          ? formData['customer_name']
-          : this.invoiceData['customer_name'];
+        this.invoiceData['name'] = formData['name']
+          ? formData['name']
+          : this.invoiceData['name'];
         this.invoiceData['order'] = formData['order']
           ? formData['order']
           : this.invoiceData['order'];
         this.invoiceData['supplier'] = formData['supplier']
           ? formData['supplier']
           : this.invoiceData['supplier'];
+        this.invoiceData['line'] = formData['line']
+          ? formData['line']
+          : this.invoiceData['line'];
         this.invoiceData['payment_type'] = formData['payment_type']
           ? formData['payment_type']
           : this.invoiceData['payment_type'];
@@ -110,9 +119,10 @@ export class EditVoiceComponent implements OnInit {
       } else {
         this.invoiceData['30days_amount'] = formData['30days_amount'];
         this.invoiceData['31days_amount'] = formData['31days_amount'];
-        this.invoiceData['customer_name'] = formData['customer_name'];
+        this.invoiceData['name'] = formData['name'];
         this.invoiceData['order'] = formData['order'];
         this.invoiceData['supplier'] = formData['supplier'];
+        this.invoiceData['line'] = formData['supplier'];
         this.invoiceData['payment_type'] = formData['payment_type'];
         this.invoiceData['milk_count'] = formData['milk_count'];
       }
@@ -120,6 +130,7 @@ export class EditVoiceComponent implements OnInit {
         .createAndUpdateCustomer({ ...this.invoiceData })
         .subscribe(data => {
           console.log('edit call back', data);
+          this._util.openSnackBar('Customer data updated sucessfully!');
         });
     }
   }

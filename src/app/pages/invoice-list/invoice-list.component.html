@@ -3,18 +3,12 @@
     <div class="col">
       <section class="example-section">
         Extra/Minus
-        <mat-slide-toggle
-          class="example-margin"
-          (change)="findDailyMonthUpdate($event)"
-        >
+        <mat-slide-toggle class="example-margin" (change)="findDailyMonthUpdate($event)">
         </mat-slide-toggle>
       </section>
     </div>
     <div class="col">
-      <button
-        class="btn bg-success text-white float-right"
-        [routerLink]="['/edit-invoice', 0]"
-      >
+      <button class="btn bg-success text-white float-right" [routerLink]="['/edit-invoice', 0]">
         New Customer
       </button>
     </div>
@@ -24,10 +18,7 @@
       <div class="form-group  mb-0">
         <p class="mb-0">Select supplier</p>
         <mat-form-field class="col-12">
-          <mat-select
-            (selectionChange)="changeSupplier($event)"
-            [(value)]="supplierName"
-          >
+          <mat-select (selectionChange)="changeSupplier($event)" [(value)]="supplierName">
             <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
               {{ supplier }}
             </mat-option>
@@ -37,15 +28,8 @@
       <div class="form-group mb-0">
         <p class="mb-0">Select line number</p>
         <mat-form-field class="col-12">
-          <mat-select
-            (selectionChange)="changeLine($event)"
-            [disabled]="disableLineNumber"
-            [(value)]="lineNumber"
-          >
-            <mat-option
-              *ngFor="let lineNumber of lineNumberList"
-              [value]="lineNumber"
-            >
+          <mat-select (selectionChange)="changeLine($event)" [disabled]="disableLineNumber" [(value)]="lineNumber">
+            <mat-option *ngFor="let lineNumber of lineNumberList" [value]="lineNumber">
               {{ lineNumber }}
             </mat-option>
           </mat-select>
@@ -54,43 +38,25 @@
 
       <div class="form-group mb-0">
         <section class="example-section">
-          <mat-checkbox
-            class="example-margin"
-            (change)="filterNotPaidCustomer($event)"
-            >Show Paid Customer Only
+          <mat-checkbox class="example-margin" (change)="filterNotPaidCustomer($event)">Show Paid Customer Only
           </mat-checkbox>
         </section>
       </div>
 
       <div class="form-group mb-0">
         <mat-form-field class="col-12">
-          <input
-            matInput
-            (keyup)="applyFilter($event.target.value)"
-            placeholder="Search Customers"
-            #input
-          />
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Customers" #input />
         </mat-form-field>
       </div>
 
       <div class="mat-elevation-z8 table-responsive mb-4">
-        <table
-          mat-table
-          [dataSource]="dataSource"
-          matSort
-          class="table-bordered"
-        >
-          <ng-container matColumnDef="customer_name">
+        <table mat-table [dataSource]="dataSource" matSort class="table-bordered">
+          <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header class="col">
               Name
             </th>
-            <td
-              mat-cell
-              class="name col pl-2"
-              *matCellDef="let invoice"
-              [routerLink]="['/edit-invoice', invoice._id]"
-            >
-              <u>{{ invoice.customer_name }}</u>
+            <td mat-cell class="name col pl-2" *matCellDef="let invoice" [routerLink]="['/edit-invoice', invoice._id]">
+              <u>{{ invoice.name }}</u>
             </td>
           </ng-container>
 
@@ -98,12 +64,7 @@
             <th mat-header-cell *matHeaderCellDef class="col text-center">
               Total
             </th>
-            <td
-              mat-cell
-              class="total col"
-              *matCellDef="let invoice"
-              style="color: rgba(22, 188, 218, 0.699);"
-            >
+            <td mat-cell class="total col" *matCellDef="let invoice" style="color: rgba(22, 188, 218, 0.699);">
               <p class="text-center" *ngIf="invoice.invoice">
                 {{
                   invoice.invoice.payment
@@ -122,15 +83,10 @@
               Pay
             </th>
             <td mat-cell class="pay col" *matCellDef="let invoice">
-              <input
-                type="number"
-                #pay
-                class="form-control form-control-sm"
-                (keyup.enter)="
+              <input type="number" #pay class="form-control form-control-sm" (keyup.enter)="
                   updateAmount($event.target.value, invoice, 'invoice_amount');
                   pay.value = ''
-                "
-              />
+                " />
             </td>
           </ng-container>
 
@@ -139,15 +95,10 @@
               Extra
             </th>
             <td mat-cell class="pay col" *matCellDef="let invoice">
-              <input
-                type="number"
-                #extra
-                class="extra_and_minus form-control form-control-sm"
-                (keyup.enter)="
+              <input type="number" #extra class="extra_and_minus form-control form-control-sm" (keyup.enter)="
                   updateAmount($event.target.value, invoice, 'extra_amount');
                   extra.value = ''
-                "
-              />
+                " />
             </td>
           </ng-container>
 
@@ -156,25 +107,17 @@
               Minus
             </th>
             <td mat-cell class="pay col" *matCellDef="let invoice">
-              <input
-                type="number"
-                #minus
-                class="extra_and_minus form-control form-control-sm"
-                (keyup.enter)="
+              <input type="number" #minus class="extra_and_minus form-control form-control-sm" (keyup.enter)="
                   updateAmount($event.target.value, invoice, 'minus_amount');
                   minus.value = ''
-                "
-              />
+                " />
             </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
 
-        <div
-          *ngIf="isLoading"
-          style="display: flex; justify-content: center; align-items: center"
-        >
+        <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
           <h2>Loading...</h2>
         </div>
         <mat-paginator [pageSizeOptions]="[25, 100]"></mat-paginator>
