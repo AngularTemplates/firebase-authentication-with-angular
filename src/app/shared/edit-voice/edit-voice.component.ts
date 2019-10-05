@@ -72,7 +72,7 @@ export class EditVoiceComponent implements OnInit {
           .getInvoiceUsingId(this.invoiceId)
           .subscribe(data => {
             console.log('this : ', data);
-            data['invoice'].payment = data['invoice'].payment.reverse();
+            data['invoice'].due = data['invoice'].due.reverse();
             console.log(data);
             this.invoiceData = data;
           });

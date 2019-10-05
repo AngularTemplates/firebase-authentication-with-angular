@@ -79,9 +79,9 @@
           </mat-expansion-panel-header>
 
           <ng-container *ngIf="
-              invoiceData && invoiceData.invoice && invoiceData.invoice.payment
+              invoiceData && invoiceData.invoice && invoiceData.invoice.history
             ">
-            <ng-container *ngFor="let payment of invoiceData.invoice.payment">
+            <ng-container *ngFor="let payment of invoiceData.invoice.history">
               <div class="col-12 pb-1 pt-1">
                 <div class="card bg-primary text-white">
                   <div class="card-body">
