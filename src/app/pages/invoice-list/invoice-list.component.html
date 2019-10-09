@@ -3,13 +3,13 @@
     <div class="col">
       <section class="example-section">
         Extra/Minus
-        <mat-slide-toggle class="example-margin" (change)="findDailyMonthUpdate($event)">
+        <mat-slide-toggle class="example-margin" [checked]="showMonthlyTextBox" (change)="findDailyMonthUpdate($event)">
         </mat-slide-toggle>
       </section>
     </div>
     <div class="col">
       <button class="btn bg-success text-white float-right" [routerLink]="['/edit-invoice', 0]">
-        New Customer
+        <mat-icon svgIcon="thumbs-up" aria-hidden="false" aria-label="Example thumbs up SVG icon">+</mat-icon>
       </button>
     </div>
   </div>
@@ -25,6 +25,10 @@
           </mat-select>
         </mat-form-field>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
       <div class="form-group mb-0">
         <p class="mb-0">Select line number</p>
         <mat-form-field class="col-12">
@@ -35,20 +39,29 @@
           </mat-select>
         </mat-form-field>
       </div>
-
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
       <div class="form-group mb-0">
         <section class="example-section">
-          <mat-checkbox class="example-margin" (change)="filterNotPaidCustomer($event)">Show Paid Customer Only
+          <mat-checkbox class="example-margin" (change)="filterNotPaidCustomer($event)">Show Paid Customers Only
           </mat-checkbox>
         </section>
       </div>
-
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
       <div class="form-group mb-0">
         <mat-form-field class="col-12">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Customers" #input />
         </mat-form-field>
       </div>
-
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
       <div class="mat-elevation-z8 table-responsive mb-4">
         <table mat-table [dataSource]="dataSource" matSort class="invoice-table table-bordered">
           <ng-container matColumnDef="name">
@@ -79,13 +92,21 @@
             </td>
           </ng-container>
 
+          <!-- <ng-container matColumnDef="manual">
+            <th mat-header-cell *matHeaderCellDef class="col text-crenter">
+              Manual
+            </th>
+            <td mat-cell class="manual-update col" *matCellDef="let invoice">
+              <mat-checkbox class="example-margin" #manual></mat-checkbox>
+            </td>
+          </ng-container> -->
           <ng-container matColumnDef="pay">
             <th mat-header-cell *matHeaderCellDef class="col text-crenter">
               Due
             </th>
             <td mat-cell class="pay col" *matCellDef="let invoice">
               <input type="number" #pay class="form-control form-control-sm" (keyup.enter)="
-                  updateAmount($event.target.value, invoice, 'invoice_amount');
+                  updateAmount($event, invoice, 'invoice_amount');
                   pay.value = ''
                 " />
             </td>
@@ -126,5 +147,3 @@
     </div>
   </div>
 </div>
-
-<!-- </div> -->

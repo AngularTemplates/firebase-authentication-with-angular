@@ -66,7 +66,10 @@ export class InvoiceListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  updateAmount(amountValue: number, customer, type) {
+  updateAmount(event, customer, type) {
+    const amountValue = event.target.value;
+    event.target.disabled = true;
+
     const customerInvoice = {};
 
     customerInvoice['amount'] = amountValue;
@@ -75,6 +78,8 @@ export class InvoiceListComponent implements OnInit {
       customerInvoice['amount'] = -amountValue;
       this._invoiceService.updateInvoice(customerInvoice).subscribe(res => {
         this.getInvoice();
+        this._utils.openSnackBar('Update successfully!');
+        event.target.disabled = false;
       });
     } else {
       customerInvoice['id'] = customer['_id'];
@@ -84,6 +89,7 @@ export class InvoiceListComponent implements OnInit {
         .subscribe(res => {
           console.log(res);
           this._utils.openSnackBar('Update successfully!');
+          event.target.disabled = false;
           this.minus_milk_value = '';
           this.extra_milk_value = '';
         });

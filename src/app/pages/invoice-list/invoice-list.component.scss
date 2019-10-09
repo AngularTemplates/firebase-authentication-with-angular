@@ -9,11 +9,31 @@
   .total p {
     padding: 0 1rem;
   }
+
+  .form-group {
+    &>p {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    mat-form-field {
+      padding: 0 !important;
+
+      .mat-form-field-infix {
+        border: none !important;
+      }
+    }
+
+    mat-form-field>.mat-form-field-wrapper>.mat-form-field-flex>.mat-form-field-infix {
+      border-top: none !important;
+    }
+  }
 }
 
 .pay>mat-form-field>.mat-form-field-wrapper>.mat-form-field-flex>.mat-form-field-infix {
   width: 100px !important;
 }
+
 
 .invoice-table {
   overflow: scroll;
@@ -42,4 +62,6 @@
       height: 35px !important;
     }
   }
+
+
 }
