@@ -14,3 +14,32 @@
 .pay>mat-form-field>.mat-form-field-wrapper>.mat-form-field-flex>.mat-form-field-infix {
   width: 100px !important;
 }
+
+.invoice-table {
+  overflow: scroll;
+
+  th {
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    padding: 0;
+  }
+
+  td {
+    color: #1c9cd6;
+  }
+
+  td.total p {
+    margin-bottom: 0;
+  }
+
+  td.pay {
+    padding: 0;
+
+    &>input {
+      width: 100px !important;
+      margin: 3px !important;
+      height: 35px !important;
+    }
+  }
+}
