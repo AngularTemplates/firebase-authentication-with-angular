@@ -1,0 +1,169 @@
+<div class="container edit-container">
+  <form [formGroup]="editInvoiceForm" class="example-form row" novalidate>
+    <div class="form-group col-12">
+      <label for="name">name:</label>
+      <input type="text" class="form-control" id="name" formControlName="name" [value]="invoiceData.name" />
+    </div>
+
+    <div class="col-12">
+      <h4>Select Supplier</h4>
+      <mat-form-field>
+        <mat-label>Select Supplier</mat-label>
+        <mat-select [(value)]="invoiceData.supplier" formControlName="supplier">
+          <mat-option *ngFor="let supplier of suppliers" [value]="supplier.value">
+            {{ supplier.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-12">
+      <h4>Select line</h4>
+      <mat-form-field>
+        <mat-label>Select line</mat-label>
+        <mat-select [(value)]="invoiceData.line" formControlName="line">
+          <mat-option *ngFor="let line of lines" [value]="line.value">
+            {{ line.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group col-12">
+      <label for="order">order:</label>
+      <input type="text" class="form-control" id="order" formControlName="order" [value]="invoiceData.order" />
+    </div>
+    <div class="form-group col-12">
+      <label for="30days_amount">30days_amount:</label>
+      <input type="text" class="form-control" id="30days_amount" formControlName="30days_amount"
+        [value]="invoiceData['30days_amount']" />
+    </div>
+    <div class="form-group col-12">
+      <label for="31days_amount">31days_amount:</label>
+      <input type="text" class="form-control" id="31days_amount" formControlName="31days_amount"
+        [value]="invoiceData['31days_amount']" />
+    </div>
+    <div class="col-12">
+      <h4>Select payment type</h4>
+      <mat-form-field>
+        <mat-label>Select payment type</mat-label>
+        <mat-select [(value)]="invoiceData.customer_type" formControlName="payment_type">
+          <mat-option *ngFor="let payment_type of payment_types" [value]="payment_type.value">
+            {{ payment_type.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group col-12">
+      <label for="milk_count">milk_count:</label>
+      <input type="text" class="form-control" id="milk_count" formControlName="milk_count"
+        [value]="invoiceData['milk_count']" />
+    </div>
+
+    <div class="container mb-3 mt-2">
+      <button class="btn btn-primary" [disabled]="editInvoiceForm.invalid" (click)="updateInvoice()">
+        Update
+      </button>
+    </div>
+    <div class="col">
+      <mat-accordion class="example-headers-align mb-2">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle class="mb-1">
+          <mat-expansion-panel-header class="bg-secondary">
+            <mat-panel-title class="text-white">
+              <u> Invoice History </u>
+            </mat-panel-title>
+            <!-- <mat-panel-description class="text-white float-right">
+              +
+            </mat-panel-description> -->
+          </mat-expansion-panel-header>
+
+          <ng-container *ngIf="
+              invoiceData && invoiceData.invoice && invoiceData.invoice.payment
+            ">
+            <ng-container *ngFor="let payment of invoiceData.invoice.payment">
+              <div class="col-12 pb-1 pt-1">
+                <div class="card bg-primary text-white">
+                  <div class="card-body">
+                    {{ payment.timestamp | date }} - {{ payment.amount }}
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+
+          <mat-action-row>
+            <button mat-button color="primary" (click)="nextStep()">
+              Next
+            </button>
+          </mat-action-row>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle class="mb-1">
+          <mat-expansion-panel-header class="bg-success text-white">
+            <mat-panel-title class="text-white">
+              <u> Extra Milk History</u>
+            </mat-panel-title>
+            <!-- <mat-panel-description>
+              Type the country name
+              <mat-icon>map</mat-icon>
+            </mat-panel-description> -->
+          </mat-expansion-panel-header>
+          <ng-container *ngIf="invoiceData.extra_milk">
+            <ng-container *ngFor="let extra of invoiceData.extra_milk | keyvalue">
+              <ng-container *ngFor="let item of extra.value">
+                <div class="col-12 pt-1 pb-1">
+                  <div class="card bg-primary text-white">
+                    <div class="card-body">
+                      {{ item.timestamp | date }} - {{ item.amount }}
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+
+          <mat-action-row>
+            <button mat-button color="warn" (click)="prevStep()">
+              Previous
+            </button>
+            <button mat-button color="primary" (click)="nextStep()">
+              Next
+            </button>
+          </mat-action-row>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle class=" mb-1">
+          <mat-expansion-panel-header class="bg-warning text-white">
+            <mat-panel-title class="text-white">
+              <u> Minus Milk History</u>
+            </mat-panel-title>
+            <mat-panel-description>
+              <!-- Inform the date you wish to travel
+              <mat-icon>date_range</mat-icon> -->
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <ng-container *ngIf="invoiceData.minus_milk">
+            <ng-container *ngFor="let minus of invoiceData.minus_milk | keyvalue">
+              <ng-container *ngFor="let item of minus.value">
+                <div class="col-12 pt-1 pb-1">
+                  <div class="card bg-primary text-white">
+                    <div class="card-body">
+                      {{ item.timestamp | date }} - {{ item.amount }}
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <mat-action-row>
+            <button mat-button color="warn" (click)="prevStep()">
+              Previous
+            </button>
+            <button mat-button color="primary" (click)="nextStep()">End</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,14 @@
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  min-height: 50px;
+  z-index: 1000;
+}

@@ -1,0 +1,11 @@
+<form class="example-form" [formGroup]="supplierForm">
+  <h4>Select supplier</h4>
+  <mat-form-field>
+    <mat-select placeholder="Select Supplier" formControlName="supplierName">
+      <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
+        {{ supplier }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<app-line-number [supplierInput]="selectedSupplier"></app-line-number>
