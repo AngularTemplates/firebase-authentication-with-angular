@@ -54,7 +54,7 @@ export class InvoiceListComponent implements OnInit {
     this.showMonthlyTextBox = localStorage.showMonthlyTextBox
       ? JSON.parse(localStorage.showMonthlyTextBox)
       : false;
-    this.displayedColumns = ['name', 'total', 'pay'];
+    this.displayedColumns = ['name', 'total', 'manual', 'pay'];
     if (this.showMonthlyTextBox) {
       this.displayedColumns = ['name', 'total', 'extra', 'minus'];
     }
@@ -173,7 +173,7 @@ export class InvoiceListComponent implements OnInit {
     } else {
       this.showMonthlyTextBox = false;
       localStorage.showMonthlyTextBox = false;
-      this.displayedColumns = ['name', 'total', 'pay'];
+      this.displayedColumns = ['name', 'total', 'manual', 'pay'];
     }
     return this.showMonthlyTextBox;
   }

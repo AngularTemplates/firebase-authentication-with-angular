@@ -92,14 +92,14 @@
             </td>
           </ng-container>
 
-          <!-- <ng-container matColumnDef="manual">
+          <ng-container matColumnDef="manual">
             <th mat-header-cell *matHeaderCellDef class="col text-crenter">
               Manual
             </th>
             <td mat-cell class="manual-update col" *matCellDef="let invoice">
-              <mat-checkbox class="example-margin" #manual></mat-checkbox>
+              <mat-checkbox class="example-margin" #manual (checked)="updateCustomerInvoiceAmount();"></mat-checkbox>
             </td>
-          </ng-container> -->
+          </ng-container>
           <ng-container matColumnDef="pay">
             <th mat-header-cell *matHeaderCellDef class="col text-crenter">
               Due
