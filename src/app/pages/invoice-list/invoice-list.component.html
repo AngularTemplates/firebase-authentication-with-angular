@@ -97,7 +97,7 @@
               Manual
             </th>
             <td mat-cell class="manual-update col" *matCellDef="let invoice">
-              <mat-checkbox class="example-margin" #manual (checked)="updateCustomerInvoiceAmount();"></mat-checkbox>
+              <button mat-button class="example-margin" #manual (click)="updateCustomerInvoiceAmount();">Manual</button>
             </td>
           </ng-container>
           <ng-container matColumnDef="pay">

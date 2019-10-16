@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatIconRegistry, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { HttpService } from '../../services/http.service';
 import { InvoiceService } from '../../services/invoice.service';
 import { UtilsService } from '../../services/utils.service';
+import { ManualUpdateCustomerInvoiceComponent } from '../../shared/manual-update-customer-invoice/manual-update-customer-invoice.component';
 
 @Component({
   selector: 'app-collection-list',
@@ -40,7 +42,8 @@ export class InvoiceListComponent implements OnInit {
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     private _invoiceService: InvoiceService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {
     iconRegistry.addSvgIcon(
       'thumbs-up',
@@ -176,5 +179,25 @@ export class InvoiceListComponent implements OnInit {
       this.displayedColumns = ['name', 'total', 'manual', 'pay'];
     }
     return this.showMonthlyTextBox;
+  }
+  updateCustomerInvoiceAmount() {
+    const dialogRef = this.dialog.open(ManualUpdateCustomerInvoiceComponent, {
+      // Pass data object as a second parameter
+      // data: {
+      //   record_id: post.userId
+      // }
+    });
+    // Need to subscribe afterClosed event of MatDialog
+    //  dialogRef.afterClosed().subscribe(confirmresult => {
+    //   console.log(confirmresult);
+    //   if (confirmresult) {
+    //     //if dialog result is yes, delete post
+    //     this.deletePost(post);
+    //     console.log("Delete confirm is approved by user.");
+    //   } else {
+    //     //if dialog result is no, DO NOT delete post
+    //     console.log("Delete confirm is cancelled by user.");
+    //   }
+    // });
   }
 }

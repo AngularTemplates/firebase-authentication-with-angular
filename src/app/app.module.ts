@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -33,6 +34,7 @@ import { HttpService } from './services/http.service';
 import { EditVoiceComponent } from './shared/edit-voice/edit-voice.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { LineNumberComponent } from './shared/line-number/line-number.component';
+import { ManualUpdateCustomerInvoiceComponent } from './shared/manual-update-customer-invoice/manual-update-customer-invoice.component';
 import { SupplierNameComponent } from './shared/supplier-name/supplier-name.component';
 import { UserComponent } from './user/user.component';
 import { UserResolver } from './user/user.resolver';
@@ -56,8 +58,10 @@ import { UserResolver } from './user/user.resolver';
     EditVoiceComponent,
     LineNumberComponent,
     SupplierNameComponent,
-    HeaderComponent
+    HeaderComponent,
+    ManualUpdateCustomerInvoiceComponent
   ],
+  entryComponents: [ManualUpdateCustomerInvoiceComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -81,6 +85,7 @@ import { UserResolver } from './user/user.resolver';
     MatSlideToggleModule,
     MatSnackBarModule,
     MatExpansionModule,
+    MatDialogModule,
     MobxAngularModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
