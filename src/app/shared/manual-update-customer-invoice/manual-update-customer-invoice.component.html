@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Manual amount update</h1>
+<form [formGroup]="updateMonthlyAmountForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Enter Amount" formControlName="amount" />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Mistake Reason" formControlName="mistake_reason" />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button type="submit" mat-raised-button color="primary">Update</button>
+    <button type="cancel" mat-raised-button [mat-dialog-close]>Cancel</button>
+  </div>
+</form>

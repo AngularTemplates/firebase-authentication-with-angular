@@ -8,8 +8,8 @@
       </section>
     </div>
     <div class="col">
-      <button class="btn bg-success text-white float-right" [routerLink]="['/edit-invoice', 0]">
-        <mat-icon svgIcon="thumbs-up" aria-hidden="false" aria-label="Example thumbs up SVG icon">+</mat-icon>
+      <button mat-mini-fab class="bg-primary float-right" [routerLink]="['/edit-invoice', 0]">
+        <mat-icon>add</mat-icon>
       </button>
     </div>
   </div>
@@ -70,7 +70,7 @@
               Name
             </th>
             <td mat-cell class="name col pl-2" *matCellDef="let invoice" [routerLink]="['/edit-invoice', invoice._id]">
-              <u>{{ invoice.name }}</u>
+              <p><u>{{ invoice.name }}</u></p>
             </td>
           </ng-container>
 
@@ -92,14 +92,7 @@
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="manual">
-            <th mat-header-cell *matHeaderCellDef class="col text-crenter">
-              Manual
-            </th>
-            <td mat-cell class="manual-update col" *matCellDef="let invoice">
-              <button mat-button class="example-margin" #manual (click)="updateCustomerInvoiceAmount();">Manual</button>
-            </td>
-          </ng-container>
+
           <ng-container matColumnDef="pay">
             <th mat-header-cell *matHeaderCellDef class="col text-crenter">
               Due
@@ -111,7 +104,15 @@
                 " />
             </td>
           </ng-container>
-
+          <ng-container matColumnDef="manual">
+            <th mat-header-cell *matHeaderCellDef class="col text-crenter">
+              Manual
+            </th>
+            <td mat-cell class="manual-update col" *matCellDef="let invoice">
+              <button mat-raised-button class="example-margin bg-primary text-white" #manual
+                (click)="updateCustomerManualInvoiceAmount(invoice._id);">Manual</button>
+            </td>
+          </ng-container>
           <ng-container matColumnDef="extra">
             <th mat-header-cell *matHeaderCellDef class="col text-crenter">
               Extra

@@ -57,7 +57,7 @@ export class InvoiceListComponent implements OnInit {
     this.showMonthlyTextBox = localStorage.showMonthlyTextBox
       ? JSON.parse(localStorage.showMonthlyTextBox)
       : false;
-    this.displayedColumns = ['name', 'total', 'manual', 'pay'];
+    this.displayedColumns = ['name', 'total', 'pay', 'manual'];
     if (this.showMonthlyTextBox) {
       this.displayedColumns = ['name', 'total', 'extra', 'minus'];
     }
@@ -176,28 +176,22 @@ export class InvoiceListComponent implements OnInit {
     } else {
       this.showMonthlyTextBox = false;
       localStorage.showMonthlyTextBox = false;
-      this.displayedColumns = ['name', 'total', 'manual', 'pay'];
+      this.displayedColumns = ['name', 'total', 'pay', 'manual'];
     }
     return this.showMonthlyTextBox;
   }
-  updateCustomerInvoiceAmount() {
+  updateCustomerManualInvoiceAmount(customerId) {
     const dialogRef = this.dialog.open(ManualUpdateCustomerInvoiceComponent, {
       // Pass data object as a second parameter
-      // data: {
-      //   record_id: post.userId
-      // }
+      data: {
+        customerId: customerId
+      }
     });
     // Need to subscribe afterClosed event of MatDialog
-    //  dialogRef.afterClosed().subscribe(confirmresult => {
-    //   console.log(confirmresult);
-    //   if (confirmresult) {
-    //     //if dialog result is yes, delete post
-    //     this.deletePost(post);
-    //     console.log("Delete confirm is approved by user.");
-    //   } else {
-    //     //if dialog result is no, DO NOT delete post
-    //     console.log("Delete confirm is cancelled by user.");
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe(confirmresult => {
+      console.log('DEATA', confirmresult);
+      this.getInvoice();
+      this._utils.openSnackBar('Update successfully!');
+    });
   }
 }
