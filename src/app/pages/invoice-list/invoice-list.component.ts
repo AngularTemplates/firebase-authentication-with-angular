@@ -182,16 +182,17 @@ export class InvoiceListComponent implements OnInit {
   }
   updateCustomerManualInvoiceAmount(customerId) {
     const dialogRef = this.dialog.open(ManualUpdateCustomerInvoiceComponent, {
-      // Pass data object as a second parameter
+      disableClose: true,
       data: {
         customerId: customerId
       }
     });
     // Need to subscribe afterClosed event of MatDialog
     dialogRef.afterClosed().subscribe(confirmresult => {
-      console.log('DEATA', confirmresult);
-      this.getInvoice();
-      this._utils.openSnackBar('Update successfully!');
+      if (confirmresult) {
+        this.getInvoice();
+        this._utils.openSnackBar('Update successfully!');
+      }
     });
   }
 }
