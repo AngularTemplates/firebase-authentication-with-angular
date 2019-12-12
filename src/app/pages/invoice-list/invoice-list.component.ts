@@ -74,13 +74,19 @@ export class InvoiceListComponent implements OnInit {
     event.target.disabled = true;
 
     const customerInvoice = {};
-
+    const that = this;
     customerInvoice['amount'] = amountValue;
     if (type === 'invoice_amount') {
       customerInvoice['customerDocId'] = customer['_id'];
       customerInvoice['amount'] = -amountValue;
       this._invoiceService.updateInvoice(customerInvoice).subscribe(res => {
-        this.getInvoice();
+        console.log(that.currentInvoiceList);
+        // this.getInvoice();
+        const foundIndex = that.currentInvoiceList.findIndex(
+          x => x.customer_id === res['customer_id']
+        );
+        that.currentInvoiceList[foundIndex] = res;
+        this.dataSource.data = that.currentInvoiceList;
         this._utils.openSnackBar('Update successfully!');
         event.target.disabled = false;
       });
