@@ -1,0 +1,10 @@
+<mat-toolbar>
+  Get the change event!
+</mat-toolbar>
+<mat-tab-group style="margin-bottom: 20px;" #changeEvent (selectedIndexChange)="tabChanged($event)">
+  <mat-tab label="Tab 1">
+    fdgfds
+    <app-collection-list></app-collection-list>
+  </mat-tab>
+  <mat-tab label="Tab 2">Tab 2</mat-tab>
+</mat-tab-group>
