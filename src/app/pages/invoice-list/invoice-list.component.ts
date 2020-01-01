@@ -19,9 +19,9 @@ export class InvoiceListComponent implements OnInit {
   currentInvoiceList = [];
   displayedColumns: string[] = ['name', 'total', 'pay', 'extra', 'minus'];
 
-  @ViewChild(MatPaginator)
+  @ViewChild(MatPaginator, { static: false })
   paginator: MatPaginator;
-  @ViewChild(MatSort)
+  @ViewChild(MatSort, { static: false })
   sort: MatSort;
   dataSource = new MatTableDataSource();
 
