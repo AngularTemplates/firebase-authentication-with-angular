@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTabsModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -36,9 +36,13 @@ import { HeaderComponent } from './shared/header/header.component';
 import { LineNumberComponent } from './shared/line-number/line-number.component';
 import { ManualUpdateCustomerInvoiceComponent } from './shared/manual-update-customer-invoice/manual-update-customer-invoice.component';
 import { SupplierNameComponent } from './shared/supplier-name/supplier-name.component';
+import { TabComponent } from './shared/tab/tab.component';
 import { UserComponent } from './user/user.component';
 import { UserResolver } from './user/user.resolver';
+import { StatisticsComponent } from './shared/statistics/statistics.component';
 
+// imports angular
+// imports custom
 // import { LineNumberComponent } from './shared/line-number/line-number.component';
 // import { SupplierNameComponent } from './shared/supplier-name/supplier-name.component';
 // page
@@ -59,7 +63,9 @@ import { UserResolver } from './user/user.resolver';
     LineNumberComponent,
     SupplierNameComponent,
     HeaderComponent,
-    ManualUpdateCustomerInvoiceComponent
+    ManualUpdateCustomerInvoiceComponent,
+    TabComponent,
+    StatisticsComponent
   ],
   entryComponents: [ManualUpdateCustomerInvoiceComponent],
   imports: [
@@ -87,6 +93,7 @@ import { UserResolver } from './user/user.resolver';
     MatExpansionModule,
     MatDialogModule,
     MobxAngularModule,
+    MatTabsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
     })

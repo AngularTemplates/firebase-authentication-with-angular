@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../core/auth.service';
-import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../core/auth.service';
 
 @Component({
   selector: 'page-login',
@@ -48,7 +49,7 @@ export class LoginComponent {
   tryLogin(value) {
     this.authService.doLogin(value).then(
       res => {
-        this.router.navigate(['/invoice-list']);
+        this.router.navigate(['/home']);
       },
       err => {
         console.log(err);

@@ -14,5 +14,6 @@ export const rootRouterConfig: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent, resolve: { data: UserResolver } },
   { path: 'invoice-list', component: InvoiceListComponent },
+  { path: 'home', component: InvoiceListComponent },
   { path: 'edit-invoice/:id', component: EditVoiceComponent }
 ];

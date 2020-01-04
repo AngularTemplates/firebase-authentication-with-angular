@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { HttpService } from '../../services/http.service';
 import { InvoiceService } from '../../services/invoice.service';
 import { UtilsService } from '../../services/utils.service';
 import { ManualUpdateCustomerInvoiceComponent } from '../../shared/manual-update-customer-invoice/manual-update-customer-invoice.component';
@@ -37,7 +36,6 @@ export class InvoiceListComponent implements OnInit {
   extra_milk_value = '';
 
   constructor(
-    private _http: HttpService,
     private _utils: UtilsService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,

@@ -10,6 +10,7 @@ export class Constants {
   INVOICE = 'invoice/';
   UPDATEINVOICE = 'update_invoice';
   UPDATEEXTRAANDMINUSAMOUNT = '/extra-and-minus-milk';
+  STATISTICS = 'statistics';
   SUPPLIERS = [
     { value: 'suresh', viewValue: 'suresh' },
     { value: 'vinoth', viewValue: 'vinoth' },

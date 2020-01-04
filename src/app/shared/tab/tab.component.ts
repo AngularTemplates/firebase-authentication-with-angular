@@ -1,4 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab',
@@ -8,7 +9,7 @@ import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 export class TabComponent implements OnInit {
   @ViewChildren('allTabs') allTabs: QueryList<any>;
 
-  constructor() {}
+  constructor(private _route: Router) {}
 
   ngOnInit() {}
 
@@ -16,7 +17,5 @@ export class TabComponent implements OnInit {
   //   console.log('total tabs: ' + this.allTabs.first._tabs.length);
   // }
 
-  tabChanged(tabChangeEvent: number) {
-    console.log('tab selected: ' + tabChangeEvent);
-  }
+  tabChanged(tabChangeEvent: number) {}
 }

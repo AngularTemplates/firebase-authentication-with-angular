@@ -1,2 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+mat-tab-header {
+  position: sticky !important;
+  top: 10%;
+  width: 100%;
+  background-color: #ffffff;
+  z-index: 1000;
+}
+
+.mat-tab-body-wrapper {
+  margin-top: 5rem !important;
+}
+
+.mat-tab-label {
+  opacity: initial !important;
+  width: 50%;
+}
+
+.mat-tab-label-active {
+  background-color: #007bff !important;
+  color: #fff;
+}
