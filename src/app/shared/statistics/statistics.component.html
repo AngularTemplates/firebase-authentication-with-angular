@@ -2,11 +2,20 @@
 <div class="row">
   <div class="col ">
     <div class="card">
-
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Total Card Amount : {{statisticsData['totalCardAmount']}}</li>
-        <li class="list-group-item">Total Amount Pay : {{statisticsData['totalAmountPay']}}</li>
-        <li class="list-group-item">Total Collected Amount : {{statisticsData['totalcollectedAmount']}}</li>
+      <ul
+        class="list-group list-group-flush"
+        *ngFor="let supplier of Object.keys(statisticsData)"
+      >
+        <li class="list-group-item">
+          Total Card Amount : {{ statisticsData[supplier]["totalCardAmount"] }}
+        </li>
+        <li class="list-group-item">
+          Total Amount Pay : {{ statisticsData[supplier]["totalAmountPay"] }}
+        </li>
+        <li class="list-group-item">
+          Total Collected Amount :
+          {{ statisticsData[supplier]["totalcollectedAmount"] }}
+        </li>
       </ul>
     </div>
   </div>

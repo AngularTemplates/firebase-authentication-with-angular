@@ -8,6 +8,7 @@ import { StatisticsService } from '../../services/statistics.service';
   styleUrls: ['./statistics.component.scss']
 })
 export class StatisticsComponent implements OnInit {
+  Object;
   constructor(private _statistic: StatisticsService) {}
   statisticsData = {};
   ngOnInit() {
