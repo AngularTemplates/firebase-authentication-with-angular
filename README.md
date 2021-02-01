@@ -1,6 +1,6 @@
 # Firebase Authentication with Angular
 
-This project is part of an Angular tutorial where we explore how to setup a simple email/password as well as social login authentication workflows for Angular 7 apps using the awesome AngularFire2 library.
+This project is part of an Angular tutorial where we explore how to setup a simple email/password as well as social login authentication workflows for Angular apps using the awesome AngularFire library.
 
 Get the step by step free tutorial in https://angular-templates.io/tutorials/about/firebase-authentication-with-angular
 
