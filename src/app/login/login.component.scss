@@ -11,3 +11,11 @@
 .error{
   color: red;
 }
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  button, p {
+    margin: 5px 0;
+  }
+}
