@@ -1,40 +1,26 @@
 <h1 class="header">Create an account with Firebase or Social Providers</h1>
 <div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <form [formGroup]="registerForm">
-        <div class="form-group">
-          <label>Email address</label>
-          <input type="email" formControlName="email" class="form-control">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form [formGroup]="registerForm" (submit)="tryRegister()">
+                <div class="form-group">
+                    <label>Email address</label>
+                    <input type="email" formControlName="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" formControlName="password">
+                    <label class="error">{{errorMessage}}</label>
+                    <label class="success">{{successMessage}}</label>
+                </div>
+                <button type="submit" class="btn btn-outline-primary">Register</button>
+            </form>
+            <div class="button-container">
+                <button type="button" class="btn btn-primary" (click)="tryFacebookLogin()">Login with Facebook</button>
+                <button type="button" class="btn btn-danger" (click)="tryGoogleLogin()">Login with Google</button>
+                <button type="button" class="btn btn-info" (click)="tryTwitterLogin()">Login with Twitter</button>
+                <p>Already have an account? <a [routerLink]="['/login']">Login</a></p>
+            </div>
         </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" class="form-control" formControlName="password">
-          <label class="error">{{errorMessage}}</label>
-          <label class="success">{{successMessage}}</label>
-        </div>
-        <button type="submit" (click)="tryRegister(registerForm.value)" class="btn btn-default">Register</button>
-      </form>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <button type="button" class="btn btn-primary btn-block" (click)="tryFacebookLogin()">Register with Facebook</button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <button type="button" class="btn btn-danger btn-block" (click)="tryGoogleLogin()">Register with Google</button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <button type="button" class="btn btn-info btn-block" (click)="tryTwitterLogin()">Register with Twitter</button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <p>Already have an account? <a href="/login">Login</a></p>
-    </div>
-  </div>
 </div>

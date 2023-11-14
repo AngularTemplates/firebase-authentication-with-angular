@@ -1,40 +1,35 @@
-import { Injectable } from "@angular/core";
-import 'rxjs/add/operator/toPromise';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase/app';
+import { Injectable } from '@angular/core';
+import { User } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable()
 export class UserService {
 
-  constructor(
-   public db: AngularFirestore,
-   public afAuth: AngularFireAuth
- ){
- }
+  constructor(public afAuth: AngularFireAuth) { }
 
-
-  getCurrentUser(){
+  getCurrentUser(): Promise<User> {
     return new Promise<any>((resolve, reject) => {
-      var user = firebase.auth().onAuthStateChanged(function(user){
+      this.afAuth.onAuthStateChanged(function(user) {
         if (user) {
           resolve(user);
         } else {
           reject('No user logged in');
         }
-      })
-    })
+      });
+    });
   }
 
-  updateCurrentUser(value){
+  updateCurrentUser(userUpdatedInfos: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      var user = firebase.auth().currentUser;
-      user.updateProfile({
-        displayName: value.name,
-        photoURL: user.photoURL
-      }).then(res => {
-        resolve(res);
-      }, err => reject(err))
-    })
+      const user = this.afAuth.currentUser.then(user => {
+        user?.updateProfile({
+          displayName: userUpdatedInfos.name,
+          photoURL: userUpdatedInfos.photoURL
+        }).then(res => {
+          console.log(res);
+          return resolve(res);
+        }, err => reject(err));
+      });
+      });
   }
 }

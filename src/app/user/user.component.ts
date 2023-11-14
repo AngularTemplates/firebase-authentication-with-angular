@@ -1,60 +1,79 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../core/user.service';
+import { CommonModule } from '@angular/common';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../core/auth.service';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FirebaseUserModel } from '../core/user.model';
+import { UserService } from '../core/user.service';
+import { User } from './user.model';
 
 @Component({
-  selector: 'page-user',
-  templateUrl: 'user.component.html',
-  styleUrls: ['user.scss']
+  selector: 'app-user',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
+  providers: [UserService, AuthService],
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit{
+export class UserComponent implements OnInit {
 
-  user: FirebaseUserModel = new FirebaseUserModel();
-  profileForm: FormGroup;
+  user: User = new User();
+  profileForm!: FormGroup;
+  displayNameAlreadySetted: boolean = true;
 
   constructor(
     public userService: UserService,
     public authService: AuthService,
-    private route: ActivatedRoute,
-    private location : Location,
+    private router: Router,
     private fb: FormBuilder
   ) {
-
-  }
-
-  ngOnInit(): void {
-    this.route.data.subscribe(routeData => {
-      let data = routeData['data'];
-      if (data) {
-        this.user = data;
-        this.createForm(this.user.name);
-      }
+    this.profileForm = this.fb.group({
+      name: ['', Validators.required]
     })
   }
 
-  createForm(name) {
+  ngOnInit(): void {
+
+    this.userService.getCurrentUser().then(user => {
+
+      if (user.providerData[0].providerId == 'password') {
+        this.user.image = 'assets/images/profile-picture.png';
+        this.user.name = user.displayName;
+        this.user.provider = user.providerData[0].providerId;
+      }
+      else {
+        this.user.image = user.photoURL;
+        this.user.name = user.displayName;
+        this.user.provider = user.providerData[0].providerId;
+      }
+      if (!this.user.name) {
+        this.displayNameAlreadySetted = true;
+      }
+      this.createForm(this.user.name);
+
+      })
+  }
+
+  createForm(name: any) {
     this.profileForm = this.fb.group({
-      name: [name, Validators.required ]
+      name: [name, Validators.required]
     });
   }
 
-  save(value){
-    this.userService.updateCurrentUser(value)
-    .then(res => {
-      console.log(res);
-    }, err => console.log(err))
+  save() {
+    console.log('test');
+
+    this.userService.updateCurrentUser({ name: this.profileForm.controls['name'].value })
+      .then(res => {
+        console.log(res);
+      }, err => console.log(err))
   }
 
-  logout(){
-    this.authService.doLogout()
-    .then((res) => {
-      this.location.back();
-    }, (error) => {
-      console.log("Logout error", error);
+  logout() {
+    this.authService.doLogout().then(() => {
+      this.router.navigate(['/login']);
+    }, err => {
+      console.log(err);
     });
   }
+
 }

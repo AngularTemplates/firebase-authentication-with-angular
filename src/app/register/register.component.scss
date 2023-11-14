@@ -1,17 +1,27 @@
-.header{
-  text-align: center;
-  font-size: 30px;
-  margin-bottom: 40px;
+.header {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 40px;
 }
 
-.row{
-  margin-top: 10px;
+.row {
+    margin-top: 10px;
 }
 
-.error{
-  color: red;
+.error {
+    color: red;
 }
 
-.success{
-  color: green;
+.success {
+    color: green;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+
+    button,
+    p {
+        margin: 5px 0;
+    }
 }
