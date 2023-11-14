@@ -7,13 +7,20 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { UserService } from './core/user.service';
 
 export const firebaseConfig: FirebaseOptions = {
-  apiKey: "YOUR_CREDENTIALS_HERE",
-  authDomain: "YOUR_CREDENTIALS_HERE",
-  projectId: "YOUR_CREDENTIALS_HERE",
-  storageBucket: "YOUR_CREDENTIALS_HERE",
-  messagingSenderId: "YOUR_CREDENTIALS_HERE",
-  appId: "YOUR_CREDENTIALS_HERE",
-  measurementId: "YOUR_CREDENTIALS_HERE"
+  apiKey: "AIzaSyARlbwlPRHTw3u1hcZVMcJulYGq-ly1x5U",
+
+  authDomain: "testproject-4d8cc.firebaseapp.com",
+
+  projectId: "testproject-4d8cc",
+
+  storageBucket: "testproject-4d8cc.appspot.com",
+
+  messagingSenderId: "35615834005",
+
+  appId: "1:35615834005:web:9d3eb4f35c24465361009c",
+
+  measurementId: "G-XC6X8J7763"
+
 };
 
 export const appConfig: ApplicationConfig = {

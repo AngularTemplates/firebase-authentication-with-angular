@@ -1,7 +1,6 @@
 # Firebase Authentication with Angular 16 done with standalone logic
 
-Thanks to [AngularTemplates](https://github.com/AngularTemplates) team for original version of this project developed with Angular 5. 
-you can get it here: https://github.com/AngularTemplates/firebase-authentication-with-angular
+This project is part of an Angular tutorial where we explore how to setup a simple email/password as well as social login authentication workflows for Angular apps using the awesome AngularFire library.
 
 
 ## Installation

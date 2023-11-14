@@ -60,6 +60,8 @@ export class UserComponent implements OnInit {
   }
 
   save() {
+    console.log('test');
+
     this.userService.updateCurrentUser({ name: this.profileForm.controls['name'].value })
       .then(res => {
         console.log(res);
